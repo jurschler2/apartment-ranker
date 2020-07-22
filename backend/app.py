@@ -11,7 +11,7 @@ app = Flask(__name__)
 def show_apartment():
     """ Return JSON object of specific apartment """
 
-    example = "https://sfbay.craigslist.org/sfc/apa/d/san-francisco-spacious-2br-with-office/7160388648.html"
+    example = "https://sfbay.craigslist.org/sfc/apa/d/san-francisco-good-deal-2br-1-ba-garden/7148010945.html"
 
     output = get_apartment(example)
 

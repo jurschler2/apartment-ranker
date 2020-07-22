@@ -20,9 +20,7 @@ def get_apartment(url):
     output = {}
 
     try:
-        apartment_pics = driver.find_elements_by_tag_name('img')
-
-        output["pics"] = apartment_pics
+        apartment_pics_raw = driver.find_elements_by_tag_name('img')
 
     except TimeoutException:
         output["error"] = "Form data took too long to load"
@@ -34,6 +32,15 @@ def get_apartment(url):
         if not output.get("error"):
             output["success"] = f"Obtained pictures"
 
+        apartment_pics = []
+
+        for image in apartment_pics_raw:
+
+            im = {'src': image.get_attribute('src')}
+            apartment_pics.append(im)
+
+        output["pics"] = apartment_pics
+
         driver.quit()
-        print (f"This is the output: {output}")
+
         return output
