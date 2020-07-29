@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import ApartmentRankerAPI from "../API";
+import ItemCard from "./ItemCard"
 
 function Home() {
 
@@ -23,16 +24,24 @@ function Home() {
 
 
   const renderApartmentPicsHTML = () => {
-    return (apartment
-      .pics
-      .map(p => (
-        <div>
-          <span>
-            This is a pic.
-            <img src={p['src']} alt={p['src']}/>
-          </span>
-        </div>
-      )))
+    // return (apartment
+    //   .pics
+    //   .map(p => (
+    //     <div>
+    //       <span>
+    //         This is a pic.
+    //         <img src={p['src']} alt={p['src']}/>
+    //       </span>
+    //     </div>
+    //   )))
+
+    return (
+      <ItemCard address={apartment.address}
+                price={apartment.price}
+                url={apartment.url}
+                pics={apartment.pics} />
+    )
+
   }
 
   if (isLoading) {

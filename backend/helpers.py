@@ -21,6 +21,8 @@ def get_apartment(url):
 
     try:
         apartment_pics_raw = driver.find_elements_by_tag_name('img')
+        apartment_price = driver.find_element_by_class_name('price').text
+        apartment_address = driver.find_element_by_class_name('mapaddress').text
 
     except TimeoutException:
         output["error"] = "Form data took too long to load"
@@ -40,9 +42,10 @@ def get_apartment(url):
             apartment_pics.append(im)
 
         output["pics"] = apartment_pics
+        output["price"] = apartment_price
+        output["address"] = apartment_address
+        output["url"] = url
 
         driver.quit()
-
-        print(f"This is the output: {output}")
 
         return output
