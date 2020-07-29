@@ -1,48 +1,48 @@
 import React, {useEffect, useState} from 'react';
-import axios from "axios";
+import ApartmentRankerAPI from "../API";
 
 function Home() {
 
   // State for the apartment object returned from backend and used below
   const [apartment, setApartment] = useState()
+  const [isLoading, setIsLoading] = useState(true);
 
-  // Placeholder base URL for getting the apartment from the backend
-  let baseURL = "http://localhost:5000/apartment";
+  useEffect(() => {
+    async function getApartment() {
+      /*TODO: Need to manipulate the picture URLs in backend to do two things:
+        1. Only grab the relevant pictures. This should be doable by looking at the URLs
+        2. Make all pictures the same size. The sizing appears to be at the end of each jpg.
+      */
+      let data = await ApartmentRankerAPI.fetchApartment();
+      setApartment(data);
+      setIsLoading(false);
+      console.log(data)
+    }
+    getApartment();
+  }, [])
 
-
-  useEffect(
-    function getApartment() {
-      async function getApartmentAPI() {
-
-        const response = await axios.get(baseURL);
-
-        if (response) setApartment(response.data);
-
-        console.log("This is the response:", response)
-        
-      }
-      getApartmentAPI();
-      console.log("This is the apartment:", apartment)
-    },
-    []
-  )
 
   const renderApartmentPicsHTML = () => {
-    return apartment.pics
+    return (apartment
+      .pics
       .map(p => (
         <div>
           <span>
             This is a pic.
-            <img src={p.src} />
+            <img src={p['src']} alt={p['src']}/>
           </span>
         </div>
-      ))
+      )))
+  }
+
+  if (isLoading) {
+    return <p>Loading</p>;
   }
 
   return (
     <div>
       Home
-      {apartment ? renderApartmentPicsHTML() : <p>No pics yet</p>}
+      {!apartment ? <p>No pics yet</p> : renderApartmentPicsHTML() }
     </div>
   )
 

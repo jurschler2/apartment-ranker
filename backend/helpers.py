@@ -43,4 +43,6 @@ def get_apartment(url):
 
         driver.quit()
 
+        print(f"This is the output: {output}")
+
         return output
