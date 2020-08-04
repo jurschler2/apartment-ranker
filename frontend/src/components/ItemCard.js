@@ -5,6 +5,7 @@ import {
   CarouselControl,
   CarouselIndicators
 } from 'reactstrap';
+import "./ItemCard.css";
 
 /**
  *  DESCRIPTION:
@@ -15,11 +16,6 @@ import {
  */
 
 function ItemCard({ address, price, pics, url }) {
-
-  console.log("This is the address prop:", address)
-  console.log("This is the price prop:", price)
-  console.log("This is the pics prop:", pics)
-  console.log("This is the url prop:", url)
 
   const [activeIndex, setActiveIndex] = useState(0);
   const [animating, setAnimating] = useState(false);
@@ -42,8 +38,6 @@ function ItemCard({ address, price, pics, url }) {
   }
 
   const slides = pics.map((item) => {
-
-    console.log("This is the image source?", item.src)
     return (
       <CarouselItem
         onExiting={() => setAnimating(true)}
@@ -71,8 +65,8 @@ function ItemCard({ address, price, pics, url }) {
         </Carousel>    
       </div>
       <div className="project-description-container">
-        <div className="project-address"><strong>{address}</strong></div>
-        <div className="project-price"><strong>{price}</strong></div>
+        <div className="project-title"><strong>{address}</strong></div>
+        <div className="project-title"><strong>{price}</strong></div>
         <div className="project-description">
           <p>Check it out on <a href={`${url}`}>Craigslist</a>.</p>
         </div>

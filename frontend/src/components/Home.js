@@ -1,6 +1,8 @@
 import React, {useEffect, useState} from 'react';
-import ApartmentRankerAPI from "../API";
-import ItemCard from "./ItemCard"
+// import ApartmentRankerAPI from "../API";
+import ItemCard from "./ItemCard";
+import {apt1} from "../mocks/mockData.js";
+import "./Home.css"
 
 function Home() {
 
@@ -8,32 +10,33 @@ function Home() {
   const [apartment, setApartment] = useState()
   const [isLoading, setIsLoading] = useState(true);
 
+  
+  // This is the actual API call useEffect
+  // useEffect(() => {
+  //   async function getApartment() {
+  //     /*TODO: Need to manipulate the picture URLs in backend to do two things:
+  //       1. Only grab the relevant pictures. This should be doable by looking at the URLs
+  //       2. Make all pictures the same size. The sizing appears to be at the end of each jpg.
+  //     */
+  //     let data = await ApartmentRankerAPI.fetchApartment();
+  //     setApartment(data);
+  //     setIsLoading(false);
+  //     console.log(data)
+  //   }
+  //   getApartment();
+  // }, [])
+
+
   useEffect(() => {
-    async function getApartment() {
-      /*TODO: Need to manipulate the picture URLs in backend to do two things:
-        1. Only grab the relevant pictures. This should be doable by looking at the URLs
-        2. Make all pictures the same size. The sizing appears to be at the end of each jpg.
-      */
-      let data = await ApartmentRankerAPI.fetchApartment();
-      setApartment(data);
-      setIsLoading(false);
-      console.log(data)
-    }
-    getApartment();
+
+    setApartment(apt1);
+    setIsLoading(false);
+
   }, [])
 
 
+
   const renderApartmentPicsHTML = () => {
-    // return (apartment
-    //   .pics
-    //   .map(p => (
-    //     <div>
-    //       <span>
-    //         This is a pic.
-    //         <img src={p['src']} alt={p['src']}/>
-    //       </span>
-    //     </div>
-    //   )))
 
     return (
       <ItemCard address={apartment.address}
@@ -51,7 +54,10 @@ function Home() {
   return (
     <div>
       Home
-      {!apartment ? <p>No pics yet</p> : renderApartmentPicsHTML() }
+      <div className="projectcard-container">
+        {!apartment ? <p>No pics yet</p> : renderApartmentPicsHTML() }
+
+      </div>
     </div>
   )
 
