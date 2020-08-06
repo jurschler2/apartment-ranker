@@ -14,7 +14,7 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 def show_apartment():
     """ Return JSON object of specific apartment """
 
-    example = "https://sfbay.craigslist.org/sfc/apa/d/san-francisco-id1762-marina-1br-1ba/7166235246.html"
+    example = "https://sfbay.craigslist.org/sfc/roo/d/san-francisco-huge-room-in-nopa-2/7168899087.html"
 
     output = get_apartment(example)
 

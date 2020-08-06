@@ -4,6 +4,14 @@ import ItemCard from "./ItemCard";
 import {apt1} from "../mocks/mockData.js";
 import "./Home.css"
 
+/**
+ *  DESCRIPTION:
+ *  PROPS: 
+ *  FLOW: 
+ *  PARENT: 
+ *  CHILDREN: 
+ */
+
 function Home() {
 
   // State for the apartment object returned from backend and used below
