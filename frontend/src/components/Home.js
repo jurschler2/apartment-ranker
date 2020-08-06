@@ -3,6 +3,7 @@ import React, {useEffect, useState} from 'react';
 import ItemCard from "./ItemCard";
 import {apt1} from "../mocks/mockData.js";
 import "./Home.css"
+import RankingsForm from './RankingsForm';
 
 /**
  *  DESCRIPTION:
@@ -47,10 +48,13 @@ function Home() {
   const renderApartmentPicsHTML = () => {
 
     return (
+      <>
       <ItemCard address={apartment.address}
                 price={apartment.price}
                 url={apartment.url}
                 pics={apartment.pics} />
+      <RankingsForm />
+      </>
     )
 
   }
