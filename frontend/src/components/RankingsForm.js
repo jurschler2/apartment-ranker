@@ -15,7 +15,6 @@ function RankingsForm({ rankings }) {
 
   return (
     <div>
-     <h1>RankingsForm</h1>
      <Formik
        initialValues={{ price: '', location: '' }}
        validate={values => {
@@ -37,6 +36,24 @@ function RankingsForm({ rankings }) {
            <label>Location</label>
            <Field type="number" name="location" />
            <ErrorMessage name="location" component="div" />
+           <label>Space</label>
+           <Field type="number" name="space" />
+           <ErrorMessage name="space" component="div" />
+           <label>Privacy</label>
+           <Field type="number" name="privacy" />
+           <ErrorMessage name="privacy" component="div" />
+           <label>Laundry</label>
+           <Field type="number" name="laundry" />
+           <ErrorMessage name="laundry" component="div" />
+           <label>Parking</label>
+           <Field type="number" name="parking" />
+           <ErrorMessage name="parking" component="div" />
+           <label>Living Room</label>
+           <Field type="number" name="living-room" />
+           <ErrorMessage name="living-room" component="div" />
+           <label>House Type</label>
+           <Field type="number" name="house-type" />
+           <ErrorMessage name="house-type" component="div" />
            <button type="submit" disabled={isSubmitting}>
              Submit
            </button>
