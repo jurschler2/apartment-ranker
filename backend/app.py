@@ -10,6 +10,8 @@ cors = CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
 # toolbar = DebugToolBarExtension(app)
 
+db = SQLAlchemy(app)
+
 @app.route('/apartment', methods=["GET"])
 def show_apartment():
     """ Return JSON object of specific apartment """
