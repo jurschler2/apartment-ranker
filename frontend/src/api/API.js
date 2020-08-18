@@ -1,5 +1,7 @@
 import axios from "axios";
 
+import _request from "./helpers";
+
 const BASE_API_URL = "http://localhost:5000/apartment";
 
 class ApartmentRankerAPI {

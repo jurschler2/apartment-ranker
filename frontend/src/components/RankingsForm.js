@@ -16,7 +16,15 @@ function RankingsForm({ rankings }) {
   return (
     <div>
      <Formik
-       initialValues={{ price: '', location: '' }}
+       initialValues={{ price: '',
+                        location: '',
+                        space: '',
+                        privacy: '',
+                        laundry: '',
+                        parking: '',
+                        livingRoom : '',
+                        houseType : ''
+                      }}
        validate={values => {
          const errors = {};
          return errors;
@@ -49,11 +57,11 @@ function RankingsForm({ rankings }) {
            <Field type="number" name="parking" />
            <ErrorMessage name="parking" component="div" />
            <label>Living Room</label>
-           <Field type="number" name="living-room" />
-           <ErrorMessage name="living-room" component="div" />
+           <Field type="number" name="livingRoom" />
+           <ErrorMessage name="livingRoom" component="div" />
            <label>House Type</label>
-           <Field type="number" name="house-type" />
-           <ErrorMessage name="house-type" component="div" />
+           <Field type="number" name="houseType" />
+           <ErrorMessage name="houseType" component="div" />
            <button type="submit" disabled={isSubmitting}>
              Submit
            </button>
