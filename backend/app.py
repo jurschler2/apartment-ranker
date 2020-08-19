@@ -32,3 +32,11 @@ def show_apartment():
     output = get_apartment(example)
 
     return output
+
+@app.route('/apartment/<int:apartment_id>', methods=["PATCH"])
+def update_rankings(apartment_id):
+    """ PATCH an existing apartment's rankings """
+
+    apt = Apartment.query.get_or_404(apartment_id)
+
+    updates = request.json
