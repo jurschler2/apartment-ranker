@@ -32,7 +32,7 @@ def get_apartment(url):
 
     finally:
         if not output.get("error"):
-            output["success"] = f"Obtained pictures"
+            output["success"] = "Obtained pictures"
 
         apartment_pics = []
 

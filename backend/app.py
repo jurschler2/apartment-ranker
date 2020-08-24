@@ -23,7 +23,6 @@ app.config['SQLALCHEMY_ECHO'] = False
 db = SQLAlchemy(app)
 db.app = app
 db.init_app(app)
-
 from models import Apartment
 
 @app.route('/apartment', methods=["GET"])
@@ -36,6 +35,18 @@ def show_apartment():
 
     return output
 
+
+@app.route('/apartment', methods=["POST"])
+def create_apartment():
+    """ Return JSON object of specific apartment """
+
+    new_apt_url = request.json['url']
+
+    response = Apartment.add_apartment(url=new_apt_url)
+
+    return response
+
+
 @app.route('/apartment/<int:apartment_id>', methods=["GET"])
 def show_specific_apartment(apartment_id):
     """ Return JSON object of specific apartment """
@@ -44,7 +55,8 @@ def show_specific_apartment(apartment_id):
 
     output = apt.serialize()
 
-    return output  
+    return output
+
 
 @app.route('/apartment/<int:apartment_id>', methods=["PATCH"])
 def update_rankings(apartment_id):

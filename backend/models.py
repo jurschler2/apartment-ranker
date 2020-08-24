@@ -1,4 +1,5 @@
 from app import db
+from sqlalchemy.exc import IntegrityError
 
 
 class Apartment(db.Model):
@@ -7,7 +8,7 @@ class Apartment(db.Model):
     __tablename__ = "apartment"
 
     apartment_id = db.Column(db.Integer, primary_key=True)
-    apartment_url = db.Column(db.String(45), unique=True, default=None)
+    apartment_url = db.Column(db.String(45), unique=True)
     apartment_address = db.Column(db.String(45), default=None)
     apartment_price = db.Column(db.Integer, default=None)
     apartment_ranking_price = db.Column(db.Integer, default=None)
@@ -23,6 +24,23 @@ class Apartment(db.Model):
         """ representation of Apartment instance."""
 
         return f"<Apartment #{self.apartment_id}: {self.apartment_url}>"
+
+    @classmethod
+    def add_apartment(cls, url):
+        """
+        Add a new apartment to the database.
+
+        Accepts a URL and returns the apartment if successful,
+        specific error message if not successful.
+        """
+        apt = Apartment(apartment_url=url)
+        try:
+            db.session.add(apt)
+            db.session.commit()
+        except IntegrityError:
+            return {'errors': {'url': 'URL already exists.' }}
+
+        return apt.serialize()
 
     def serialize(self):
         """ Return a dictionary of the apartment. """
