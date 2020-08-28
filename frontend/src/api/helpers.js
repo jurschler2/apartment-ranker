@@ -1,7 +1,6 @@
 import axios from "axios";
 
 /**
- *
  * Returns first digit of statusCode
  */
 const statusCategory = (statusCode) => Math.floor(statusCode / 100);
@@ -17,6 +16,7 @@ const statusCategory = (statusCode) => Math.floor(statusCode / 100);
  * returns => { status, message }
  *
  */
+
 const _request = async ({ ...options }) => {
   try {
     const response = await axios(options);
