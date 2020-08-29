@@ -12,11 +12,7 @@ let apt1 = {
   address: "Masonic near Fell",
   url: "craigslist.org/example-apartment",
   price: "$1300",
-  pics: [
-    {src: examplePic0},
-    {src: examplePic1},
-    {src: examplePic2},
-    {src: examplePic3}
+  pics: [examplePic0, examplePic1, examplePic2, examplePic3
   ]
    
 }

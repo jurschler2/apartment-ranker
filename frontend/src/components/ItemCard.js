@@ -42,9 +42,9 @@ function ItemCard({ address, price, pics, url }) {
       <CarouselItem
         onExiting={() => setAnimating(true)}
         onExited={() => setAnimating(false)}
-        key={item.src}
+        key={item}
       >
-        <img src={item.src} alt={item.src}/>
+        <img src={item} alt={item}/>
         
       </CarouselItem>
     );

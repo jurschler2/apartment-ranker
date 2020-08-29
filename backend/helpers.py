@@ -38,8 +38,12 @@ def get_apartment(url):
 
         for image in apartment_pics_raw:
 
-            im = {'src': image.get_attribute('src')}
-            apartment_pics.append(im)
+            im = image.get_attribute('src')
+            CORRECT_IMAGE_URL_START = 'https://images'
+
+            if im[:14] == CORRECT_IMAGE_URL_START:
+                im = resize_pic(im)
+                apartment_pics.append(im)
 
         output["pics"] = apartment_pics
         output["price"] = apartment_price
@@ -49,3 +53,17 @@ def get_apartment(url):
         driver.quit()
 
         return output
+
+
+def resize_pic(pic):
+    """
+    Accepts a URL string for a picture from craigslist
+    and resizes the picture to be uniform.
+    """
+
+    CORRECT_SIZE = '600x450.jpg'
+
+    if pic[-11:] != CORRECT_SIZE:
+        pic = pic[:-10] + CORRECT_SIZE
+
+    return pic
