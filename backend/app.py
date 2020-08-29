@@ -26,12 +26,12 @@ db.init_app(app)
 from models import Apartment
 
 @app.route('/apartment', methods=["GET"])
-def show_apartment():
+def show_apartment(url):
     """ Return JSON object of specific apartment """
 
-    example = "https://sfbay.craigslist.org/sfc/roo/d/san-francisco-huge-room-in-nopa-2/7168899087.html"
+    # example = "https://sfbay.craigslist.org/sfc/roo/d/san-francisco-huge-room-in-nopa-2/7168899087.html"
 
-    output = get_apartment(example)
+    output = get_apartment(url)
 
     return output
 
@@ -42,9 +42,11 @@ def create_apartment():
 
     new_apt_url = request.json['url']
 
-    response = Apartment.add_apartment(url=new_apt_url)
+    output = get_apartment(new_apt_url)
 
-    return response
+    # Apartment.add_apartment(url=new_apt_url)
+
+    return output
 
 
 @app.route('/apartment/<int:apartment_id>', methods=["GET"])

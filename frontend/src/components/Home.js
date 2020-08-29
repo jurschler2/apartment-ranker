@@ -4,6 +4,7 @@ import ItemCard from "./ItemCard";
 import {apt1} from "../mocks/mockData.js";
 import "./Home.css"
 import RankingsForm from './RankingsForm';
+import NewApartmentForm from './NewApartmentForm';
 
 /**
  *  DESCRIPTION:
@@ -54,6 +55,7 @@ function Home() {
                 url={apartment.url}
                 pics={apartment.pics} />
       <RankingsForm />
+      <NewApartmentForm />
       </>
     )
 

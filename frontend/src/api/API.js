@@ -11,10 +11,11 @@ class ApartmentRankerAPI {
     return result.data;
   }
 
-  // static async addApartment(url) {
-  //   const result = await axios.post(BASE_API_URL, data={url})
-  //   return result.data;
-  // }
+  static async addApartment(url) {
+    console.log("This is the url", url)
+    const result = await axios.post(BASE_API_URL, {url})
+    return result.data;
+  }
 }
 
 export default ApartmentRankerAPI;
