@@ -1,7 +1,7 @@
 """ Routes to show apartments """
 import os
 from flask import Flask, request
-from flask_cors import CORS, cross_origin
+from flask_cors import CORS
 # from flask_debugtoolbar import DebugToolBarExtension
 from helpers import get_apartment
 from flask_sqlalchemy import SQLAlchemy
