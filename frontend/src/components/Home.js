@@ -5,6 +5,8 @@ import {apt1} from "../mocks/mockData.js";
 import "./Home.css"
 import RankingsForm from './RankingsForm';
 import NewApartmentForm from './NewApartmentForm';
+import { useDispatch, shallowEqual, useSelector } from "react-redux";
+import { getApartmentsFromAPI } from "../reducer/actions";
 
 /**
  *  DESCRIPTION:
@@ -17,8 +19,10 @@ import NewApartmentForm from './NewApartmentForm';
 function Home() {
 
   // State for the apartment object returned from backend and used below
-  const [apartment, setApartment] = useState()
+  const apartments = useSelector(store => Object.values(store.apartments), shallowEqual)
   const [isLoading, setIsLoading] = useState(true);
+
+  const dispatch = useDispatch()
 
   
   // This is the actual API call useEffect
@@ -37,44 +41,51 @@ function Home() {
   // }, [])
 
 
-  useEffect(() => {
+  useEffect(
+    function FetchApartmentsFromAPI() {
+      dispatch(getApartmentsFromAPI())
+    }, [dispatch]
+  );
 
-    setApartment(apt1);
-    setIsLoading(false);
-
-  }, [])
-
-
-
-  const renderApartmentPicsHTML = () => {
-
-    return (
-      <>
-      <ItemCard address={apartment.address}
-                price={apartment.price}
-                url={apartment.url}
-                pics={apartment.pics} />
-      <RankingsForm />
-      <NewApartmentForm />
-      </>
-    )
-
-  }
-
-  if (isLoading) {
-    return <p>Loading</p>;
-  }
-
-  return (
-    <div>
-      Home
-      <div className="projectcard-container">
-        {!apartment ? <p>No pics yet</p> : renderApartmentPicsHTML() }
-
-      </div>
-    </div>
+  useEffect(
+    function PopulateApartments() {
+      if ()
+    }
   )
 
+
+
+  const renderApartmentPicsHTML = (apts) => {
+
+    return apts
+      .map(a => (
+        <>
+        <ItemCard address={a.address}
+                  price={a.price}
+                  url={a.url}
+                  // pics={a.pics}
+        />
+        <RankingsForm />
+        </>
+      ));
+      
+    }
+    
+    if (isLoading) {
+      return <p>Loading</p>;
+    }
+    
+    return (
+      <div>
+      Home
+      <div className="projectcard-container">
+        {!apartments ? <p>No pics yet</p> : renderApartmentPicsHTML() }
+
+      </div>
+      <NewApartmentForm />
+    </div>
+  )
+  
 }
 
 export default Home;

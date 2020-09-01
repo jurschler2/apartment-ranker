@@ -42,6 +42,14 @@ class Apartment(db.Model):
 
         return apt
 
+    @classmethod
+    def get_all_apartments(cls):
+        """ Return a serialized object of all apartments """
+
+        apartments = Apartment.query.all()
+
+        return {"apartments": [apt.serialize() for apt in apartments]}
+
     def serialize(self):
         """ Return a dictionary of the apartment. """
 

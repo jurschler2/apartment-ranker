@@ -5,8 +5,10 @@ from models import Apartment
 db.drop_all()
 db.create_all()
 
-apartment = Apartment.add_apartment(url='craigslist.org/example')
-apartment.apartment_address = 'Masonic Near Fell'
+apartment1 = Apartment.add_apartment(url='craigslist.org/example')
+apartment2 = Apartment.add_apartment(url='ft.com')
 
-db.session.add(apartment)
+apartment1.apartment_address = 'Masonic Near Fell'
+
+db.session.add_all([apartment1, apartment2])
 db.session.commit()

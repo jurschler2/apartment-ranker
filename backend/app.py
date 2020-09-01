@@ -76,3 +76,11 @@ def update_rankings(apartment_id):
     output = apt.serialize()
 
     return output
+
+@app.route('/apartment/all', methods=["GET"])
+def get_every_apartment():
+    """ """
+
+    output = Apartment.get_all_apartments()
+
+    return output

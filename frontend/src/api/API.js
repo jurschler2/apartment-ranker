@@ -11,6 +11,11 @@ class ApartmentRankerAPI {
     return result.data;
   }
 
+  static async fetchAllApartment() {
+    const result = await axios.get(`${BASE_API_URL}/all`);
+    return result.data;
+  }
+
   static async addApartment(url) {
     console.log("This is the url", url)
     const result = await axios.post(BASE_API_URL, {url})
