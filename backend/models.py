@@ -56,6 +56,7 @@ class Apartment(db.Model):
         """ Return a serialized object of all apartments """
 
         apartments = Apartment.query.all()
+
         output = [apt.serialize() for apt in apartments]
 
         return {"apartments": output}
@@ -63,8 +64,7 @@ class Apartment(db.Model):
     def serialize(self):
         """ Return a dictionary of the apartment. """
 
-        rankings = Rankings.get_rankings(apartment_url=self.apartment_url)
-        serialized_rankings = rankings.serialize_for_apartment()
+        serialized_rankings = self.rankings.serialize_for_apartment()
         serialized_photos = [photo.serialize_for_apartment() for photo in self.photos]
 
         return {
@@ -100,10 +100,10 @@ class Rankings(db.Model):
                    for Apartment #{self.r_apartment_url}>"""
 
     @classmethod
-    def get_rankings(cls, apartment_url):
+    def get_rankings(cls, r_apartment_url):
         """ get the rankings for an apartment by its url """
 
-        rankings = Rankings.query.filter_by(r_apartment_url=apartment_url).first()
+        rankings = Rankings.query.filter_by(r_apartment_url=r_apartment_url).first()
         return rankings
 
     def serialize_for_apartment(self):
