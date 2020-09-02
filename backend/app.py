@@ -25,6 +25,7 @@ db.app = app
 db.init_app(app)
 from models import Apartment
 
+
 @app.route('/apartment', methods=["GET"])
 def show_apartment(url):
     """ Return JSON object of specific apartment """
@@ -42,11 +43,13 @@ def create_apartment():
 
     new_apt_url = request.json['url']
 
-    output = get_apartment(new_apt_url)
+    # output = get_apartment(new_apt_url)
 
-    # Apartment.add_apartment(url=new_apt_url)
+    output = Apartment.add_apartment(url=new_apt_url)
 
-    return output
+    print(f"This is the output: {output}")
+
+    return output.serialize()
 
 
 @app.route('/apartment/<int:apartment_id>', methods=["GET"])

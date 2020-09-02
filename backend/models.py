@@ -1,5 +1,6 @@
 from app import db
 from sqlalchemy.exc import IntegrityError
+from helpers import get_apartment
 
 
 class Apartment(db.Model):
@@ -8,11 +9,13 @@ class Apartment(db.Model):
     __tablename__ = "apartment"
 
     # apartment_id = db.Column(db.Integer, primary_key=True)
-    apartment_url = db.Column(db.String(45), primary_key=True, unique=True)
-    apartment_address = db.Column(db.String(45), default=None)
-    apartment_price = db.Column(db.Integer, default=None)
+    apartment_url = db.Column(db.String(145), primary_key=True, unique=True)
+    apartment_address = db.Column(db.String(145), default=None)
+    apartment_price = db.Column(db.String(8), default=None)
     rankings = db.relationship("Rankings",
                                backref=db.backref('apartment'), uselist=False)
+    photos = db.relationship("Photo",
+                             backref=db.backref('apartment'), uselist=True)
 
     def __repr__(self):
         """ representation of Apartment instance."""
@@ -27,19 +30,26 @@ class Apartment(db.Model):
         Accepts a URL and returns the apartment if successful,
         specific error message if not successful.
         """
-        apt = Apartment(apartment_url=url)
+
+        new = get_apartment(url)
+
+        apt = Apartment(apartment_url=url,
+                        apartment_address=new['address'],
+                        apartment_price=new['price'],
+                        )
+        apt_photos = [Photo(photo_url=photo, apartment_url=url) for photo in new['pics']]
+
         try:
             rankings = Rankings()
             rankings.apartment_url = apt.apartment_url
             db.session.add(apt)
             db.session.add(rankings)
+            db.session.add_all(apt_photos)
             db.session.commit()
         except IntegrityError:
             return {'errors': {'url': 'URL already exists.'}}
 
-        print(f"These are the rankings {rankings}")
-        print(f"This is the apartment {apt}")
-
+        apt = Apartment.query.filter_by(apartment_url=url).first()
         return apt
 
     @classmethod
@@ -55,12 +65,14 @@ class Apartment(db.Model):
 
         rankings = Rankings.get_rankings(apartment_url=self.apartment_url)
         serialized_rankings = rankings.serialize_for_apartment()
+        serialized_photos = [photo.serialize_for_apartment() for photo in self.photos]
 
         return {
             "apartment_url": self.apartment_url,
             "apartment_price": self.apartment_price,
             "apartment_address": self.apartment_address,
             "apartment_rankings": serialized_rankings,
+            "apartment_photos": serialized_photos,
         }
 
 
@@ -78,7 +90,7 @@ class Rankings(db.Model):
     ranking_laundry = db.Column(db.Integer, default=None)
     ranking_living_room = db.Column(db.Integer, default=None)
     ranking_house_type = db.Column(db.Integer, default=None)
-    apartment_url = db.Column(db.String(45),
+    apartment_url = db.Column(db.String(145),
                               db.ForeignKey("apartment.apartment_url"))
 
     def __repr__(self):
@@ -109,3 +121,24 @@ class Rankings(db.Model):
             "ranking_house_type": self.ranking_house_type,
             "apartment_url": self.apartment_url,
         }
+
+
+class Photo(db.Model):
+    """ Photo Table """
+
+    __tablename__ = "photo"
+
+    photo_id = db.Column(db.Integer, primary_key=True)
+    photo_url = db.Column(db.String(145), unique=False)
+    apartment_url = db.Column(db.String(145),
+                              db.ForeignKey("apartment.apartment_url"))
+
+    def __repr__(self):
+        """ representation of Photo instance."""
+
+        return f"<Photo {self.photo_id} for apt {self.apartment_url}>"
+
+    def serialize_for_apartment(self):
+        """ serialize a photo """
+
+        return self.photo_url
