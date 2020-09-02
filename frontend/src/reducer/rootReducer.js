@@ -1,4 +1,4 @@
-import { ADD_APARTMENT } from "./actionTypes";
+import { ADD_APARTMENT, LOAD_APARTMENTS } from "./actionTypes";
 
 import produce from "immer";
 
@@ -14,6 +14,10 @@ import produce from "immer";
 
         // case ADD_APARTMENT:
         //   draft.apartments[action.url]
+
+        case LOAD_APARTMENTS:
+          draft.apartments = action.apartments;
+          break;
 
         default:
           return draft;  

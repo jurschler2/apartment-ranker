@@ -20,7 +20,8 @@ export function getApartmentsFromAPI() {
 
     try {
       let res = await axios.get(`${BASE_URL}/all`);
-      dispatch(loadApartments(res.data));
+      console.log("This is the response data:", res.data)
+      dispatch(loadApartments(res.data.apartments));
     }
 
     catch(err) {

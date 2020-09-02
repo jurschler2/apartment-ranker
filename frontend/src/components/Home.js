@@ -49,9 +49,12 @@ function Home() {
 
   useEffect(
     function PopulateApartments() {
-      if ()
-    }
-  )
+      if (apartments) {
+        setIsLoading(false);
+        console.log("These are the apartments:", apartments)
+      }
+    }, [apartments]
+  );
 
 
 
@@ -60,9 +63,9 @@ function Home() {
     return apts
       .map(a => (
         <>
-        <ItemCard address={a.address}
-                  price={a.price}
-                  url={a.url}
+        <ItemCard address={a.apartment_address}
+                  price={a.apartment_price}
+                  url={a.apartment_url}
                   // pics={a.pics}
         />
         <RankingsForm />
@@ -79,7 +82,7 @@ function Home() {
       <div>
       Home
       <div className="projectcard-container">
-        {!apartments ? <p>No pics yet</p> : renderApartmentPicsHTML() }
+        {!apartments ? <p>No pics yet</p> : renderApartmentPicsHTML(apartments) }
 
       </div>
       <NewApartmentForm />

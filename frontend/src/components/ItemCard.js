@@ -32,10 +32,10 @@ function ItemCard({ address, price, url }) {
   //   setActiveIndex(nextIndex);
   // }
 
-  const goToIndex = (newIndex) => {
-    if (animating) return;
-    setActiveIndex(newIndex);
-  }
+  // const goToIndex = (newIndex) => {
+  //   if (animating) return;
+  //   setActiveIndex(newIndex);
+  // }
 
   // const slides = pics.map((item) => {
   //   return (
@@ -52,26 +52,27 @@ function ItemCard({ address, price, url }) {
 
   return (
     <div className="project-container">
-      <div className="project-img-container">
+      {/* <div className="project-img-container">
         <Carousel
           activeIndex={activeIndex}
-          // next={next}
-          // previous={previous}
-        >
+          // next={next} */}
+          {/* // previous={previous} */}
+        {/* > */}
           {/* <CarouselIndicators items={pics} activeIndex={activeIndex} onClickHandler={goToIndex} />
           {slides}
           <CarouselControl direction="prev" directionText="Previous" onClickHandler={previous} />
           <CarouselControl direction="next" directionText="Next" onClickHandler={next} /> */}
-        </Carousel>    
-      </div>
-      <div className="project-description-container">
-        <div className="project-title"><strong>{address}</strong></div>
+        {/* </Carousel>     */}
+      {/* </div>
+      <div className="project-description-container"> */}
+        {/* <div className="project-title"><strong>{address}</strong></div>
         <div className="project-title"><strong>{price}</strong></div>
-        <div className="project-description">
+        <div className="project-description"> */}
+          <p>{address}</p>
           <p>Check it out on <a href={`${url}`}>Craigslist</a>.</p>
         </div>
-      </div>
-    </div>
+    //   </div>
+    // </div>
     )
   }
   
