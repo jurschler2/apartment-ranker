@@ -60,6 +60,8 @@ function Home() {
 
   const renderApartmentPicsHTML = (apts) => {
 
+    console.log("These are the apartments before render:", apts)
+
     return apts
       .map(a => (
         <>

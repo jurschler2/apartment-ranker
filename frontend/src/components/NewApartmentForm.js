@@ -1,6 +1,8 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import ApartmentRankerAPI from "../api/API";
+import { addApartmentToAPI } from "../reducer/actions";
 import ItemCard from "./ItemCard";
 
 /**
@@ -14,18 +16,20 @@ import ItemCard from "./ItemCard";
 
 function NewApartmentForm() {
 
-  const [apartment, setApartment] = useState();
 
-  const renderApartment = () => {
+  const dispatch = useDispatch()
+  // const [apartment, setApartment] = useState();
 
-    return (
+  // const renderApartment = () => {
 
-      <ItemCard address={apartment.address}
-      price={apartment.price}
-      url={apartment.url}
-      pics={apartment.pics} />
-      )
-  }
+  //   return (
+
+  //     <ItemCard address={apartment.address}
+  //     price={apartment.price}
+  //     url={apartment.url}
+  //     pics={apartment.pics} />
+  //     )
+  // }
 
   return (
     <div>
@@ -40,11 +44,9 @@ function NewApartmentForm() {
          setTimeout(async () => {
            alert(JSON.stringify(values, null, 2));
            setSubmitting(true);
-           const response = await ApartmentRankerAPI.addApartment(values.url);
-           setApartment(response);
+          //  const response = await ApartmentRankerAPI.addApartment(values.url);
+           dispatch(addApartmentToAPI(values.url))
            setSubmitting(false);
-
-          console.log("This is the response object:", response);
 
          }, 4000);
        }}
@@ -60,7 +62,7 @@ function NewApartmentForm() {
          </Form>
        )}
      </Formik>
-     {apartment ? renderApartment() : null}
+     {/* {apartment ? renderApartment() : null} */}
    </div>
  );
 }

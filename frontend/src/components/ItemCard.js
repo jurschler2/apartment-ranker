@@ -64,7 +64,7 @@ function ItemCard({ address, price, pics, url }) {
           <CarouselControl direction="next" directionText="Next" onClickHandler={next} />
         </Carousel>    
       </div>
-      <div className="project-description-container">}
+      <div className="project-description-container">
         <div className="project-title"><strong>{address}</strong></div>
         <div className="project-title"><strong>{price}</strong></div>
         <div className="project-description">

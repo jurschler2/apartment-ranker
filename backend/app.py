@@ -47,8 +47,6 @@ def create_apartment():
 
     output = Apartment.add_apartment(url=new_apt_url)
 
-    print(f"This is the output: {output}")
-
     return output.serialize()
 
 
