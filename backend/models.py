@@ -37,11 +37,10 @@ class Apartment(db.Model):
                         apartment_address=new['address'],
                         apartment_price=new['price'],
                         )
-        apt_photos = [Photo(photo_url=photo, apartment_url=url) for photo in new['pics']]
+        apt_photos = [Photo(photo_url=photo, p_apartment_url=url) for photo in new['pics']]
 
         try:
-            rankings = Rankings()
-            rankings.apartment_url = apt.apartment_url
+            rankings = Rankings(r_apartment_url=apt.apartment_url)
             db.session.add(apt)
             db.session.add(rankings)
             db.session.add_all(apt_photos)
@@ -57,8 +56,9 @@ class Apartment(db.Model):
         """ Return a serialized object of all apartments """
 
         apartments = Apartment.query.all()
+        output = [apt.serialize() for apt in apartments]
 
-        return {"apartments": [apt.serialize() for apt in apartments]}
+        return {"apartments": output}
 
     def serialize(self):
         """ Return a dictionary of the apartment. """
@@ -90,20 +90,20 @@ class Rankings(db.Model):
     ranking_laundry = db.Column(db.Integer, default=None)
     ranking_living_room = db.Column(db.Integer, default=None)
     ranking_house_type = db.Column(db.Integer, default=None)
-    apartment_url = db.Column(db.String(145),
-                              db.ForeignKey("apartment.apartment_url"))
+    r_apartment_url = db.Column(db.String(145),
+                                db.ForeignKey("apartment.apartment_url"))
 
     def __repr__(self):
         """ representation of Rankings instance."""
 
         return f"""<Ranking #{self.ranking_id}
-                   for Apartment #{self.apartment_url}>"""
+                   for Apartment #{self.r_apartment_url}>"""
 
     @classmethod
     def get_rankings(cls, apartment_url):
         """ get the rankings for an apartment by its url """
 
-        rankings = Rankings.query.filter_by(apartment_url=apartment_url).first()
+        rankings = Rankings.query.filter_by(r_apartment_url=apartment_url).first()
         return rankings
 
     def serialize_for_apartment(self):
@@ -119,7 +119,7 @@ class Rankings(db.Model):
             "ranking_laundry": self.ranking_laundry,
             "ranking_living_room": self.ranking_living_room,
             "ranking_house_type": self.ranking_house_type,
-            "apartment_url": self.apartment_url,
+            "apartment_url": self.r_apartment_url,
         }
 
 
@@ -130,13 +130,13 @@ class Photo(db.Model):
 
     photo_id = db.Column(db.Integer, primary_key=True)
     photo_url = db.Column(db.String(145), unique=False)
-    apartment_url = db.Column(db.String(145),
-                              db.ForeignKey("apartment.apartment_url"))
+    p_apartment_url = db.Column(db.String(145),
+                                db.ForeignKey("apartment.apartment_url"))
 
     def __repr__(self):
         """ representation of Photo instance."""
 
-        return f"<Photo {self.photo_id} for apt {self.apartment_url}>"
+        return f"<Photo {self.photo_id} for apt {self.p_apartment_url}>"
 
     def serialize_for_apartment(self):
         """ serialize a photo """

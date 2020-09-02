@@ -66,7 +66,7 @@ function Home() {
         <ItemCard address={a.apartment_address}
                   price={a.apartment_price}
                   url={a.apartment_url}
-                  // pics={a.pics}
+                  pics={a.apartment_photos}
         />
         <RankingsForm />
         </>
