@@ -1,12 +1,10 @@
 import React, {useEffect, useState} from 'react';
-// import ApartmentRankerAPI from "../API";
 import ItemCard from "./ItemCard";
-import {apt1} from "../mocks/mockData.js";
-import "./Home.css"
 import RankingsForm from './RankingsForm';
 import NewApartmentForm from './NewApartmentForm';
 import { useDispatch, shallowEqual, useSelector } from "react-redux";
 import { getApartmentsFromAPI } from "../reducer/actions";
+import { Row, Col, Container } from "react-bootstrap";
 
 /**
  *  DESCRIPTION:
@@ -19,27 +17,9 @@ import { getApartmentsFromAPI } from "../reducer/actions";
 function Home() {
 
   // State for the apartment object returned from backend and used below
-  const apartments = useSelector(store => Object.values(store.apartments), shallowEqual)
   const [isLoading, setIsLoading] = useState(true);
-
+  const apartments = useSelector(store => Object.values(store.apartments), shallowEqual)
   const dispatch = useDispatch()
-
-  
-  // This is the actual API call useEffect
-  // useEffect(() => {
-  //   async function getApartment() {
-  //     /*TODO: Need to manipulate the picture URLs in backend to do two things:
-  //       1. Only grab the relevant pictures. This should be doable by looking at the URLs
-  //       2. Make all pictures the same size. The sizing appears to be at the end of each jpg.
-  //     */
-  //     let data = await ApartmentRankerAPI.fetchApartment();
-  //     setApartment(data);
-  //     setIsLoading(false);
-  //     console.log(data)
-  //   }
-  //   getApartment();
-  // }, [])
-
 
   useEffect(
     function FetchApartmentsFromAPI() {
@@ -56,24 +36,16 @@ function Home() {
     }, [apartments]
   );
 
-
-
   const renderApartmentPicsHTML = (apts) => {
-
-    console.log("These are the apartments before render:", apts)
 
     return apts
       .map(a => (
-        <>
         <ItemCard address={a.apartment_address}
                   price={a.apartment_price}
                   url={a.apartment_url}
                   pics={a.apartment_photos}
         />
-        <RankingsForm />
-        </>
-      ));
-      
+      )); 
     }
     
     if (isLoading) {
@@ -81,16 +53,32 @@ function Home() {
     }
     
     return (
-      <div>
-      Home
-      <div className="projectcard-container">
-        {!apartments ? <p>No pics yet</p> : renderApartmentPicsHTML(apartments) }
-
-      </div>
-      <NewApartmentForm />
-    </div>
+    <> 
+     <Container className="sectionContainer" id="/apartments">
+       <Row>
+         <Col md={12} lg={12}>
+           <h3>Apartments</h3>
+         </Col>
+       </Row>
+       <Row>
+         <Col md={12} lg={12}>
+          <div className="itemCardContainer">
+            {!apartments ? <p>No pics yet</p> : renderApartmentPicsHTML(apartments) }
+          </div>
+         </Col>
+       </Row>
+      </Container>
+      <Container className="sectionContainer" id="/add">  
+        <Row>
+          <Col md={12} lg={12}>
+            <div className="newApartmentForm">
+              <NewApartmentForm />
+            </div> 
+          </Col>
+        </Row>
+      </Container>
+      </>   
   )
-  
 }
 
 export default Home;

@@ -5,7 +5,9 @@ import {
   CarouselControl,
   CarouselIndicators
 } from 'reactstrap';
-import "./ItemCard.css";
+import { Card, Row, Col } from 'react-bootstrap';
+// import "./ItemCard.css";
+import RankingsForm from "./RankingsForm";
 
 /**
  *  DESCRIPTION:
@@ -44,35 +46,40 @@ function ItemCard({ address, price, pics, url }) {
         onExited={() => setAnimating(false)}
         key={item}
       >
-        <img src={item} alt={item}/>
+        <img className="projectImage" src={item} alt={item}/>
         
       </CarouselItem>
     );
   });
 
   return (
-    <div className="project-container">
-      <div className="project-img-container">
-        <Carousel
-          activeIndex={activeIndex}
-          next={next}
-          previous={previous}
-        >
-          <CarouselIndicators items={pics} activeIndex={activeIndex} onClickHandler={goToIndex} />
-          {slides}
-          <CarouselControl direction="prev" directionText="Previous" onClickHandler={previous} />
-          <CarouselControl direction="next" directionText="Next" onClickHandler={next} />
-        </Carousel>    
-      </div>
-      <div className="project-description-container">
-        <div className="project-title"><strong>{address}</strong></div>
-        <div className="project-title"><strong>{price}</strong></div>
-        <div className="project-description">
-          <p>{address}</p>
-          <p>Check it out on <a href={`${url}`}>Craigslist</a>.</p>
+   <Card className="project-container col-12">
+     <Row>
+      <Col md={12} lg={4}>
+        <div className="projectImageContainer">
+          <Carousel
+            activeIndex={activeIndex}
+            next={next}
+            previous={previous}
+          >
+            <CarouselIndicators items={pics} activeIndex={activeIndex} onClickHandler={goToIndex} />
+            {slides}
+            <CarouselControl direction="prev" directionText="Previous" onClickHandler={previous} />
+            <CarouselControl direction="next" directionText="Next" onClickHandler={next} />
+          </Carousel>    
         </div>
-      </div>
-    </div>
+       </Col>
+       <Col md={12} lg={8}>
+         <div className="projectDetails">
+          <p className="project-title"><strong>{address}</strong></p>
+          <p className="project-title"><strong>{price}</strong></p>
+          <p>Check it out on <a href={`${url}`}>Craigslist</a>.</p>
+         </div>
+        <RankingsForm />
+       </Col>
+     </Row>
+
+   </Card> 
     )
   }
   

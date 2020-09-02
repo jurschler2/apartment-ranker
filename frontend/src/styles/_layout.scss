@@ -1,1 +1,65 @@
 @import '_colors.scss';
+@import "~bootstrap/scss/functions.scss";
+@import "~bootstrap/scss/variables.scss";
+@import "~bootstrap/scss/mixins/_breakpoints.scss";
+
+$backgroundColor: #ffffe5;
+$cardColor: #fbfaf3;
+
+/* FULLPAGE */
+
+#root {
+  background-color: $primaryColor;
+}
+
+/* THROUGHOUT */
+
+.sectionContainer {
+  margin: 2rem;
+  padding: 100px 0;
+  color: $primaryColor;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* ITEMCARD */
+
+.project-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.project-container.card {
+  background-color: $cardColor;
+  margin: 1rem 0;
+}
+
+.projectDetails {
+  display: flex;
+  align-items: center;
+}
+
+.projectImage {
+  width: 100%;
+  background-position: left;
+  background-size: cover;
+  background-color: $secondaryColor;
+  border: 3px solid $secondaryColor;
+  border-radius: .25rem;
+
+  &:hover {
+    background-color: lighten($color: $backgroundColor, $amount: 35%);
+    background-blend-mode: overlay;
+
+  }
+}
+
+.projectImageContainer {
+  width: 100%;
+  // padding-left: 20%;
+  // padding-right: 20%;
+  padding: 1rem;
+  margin: auto;
+}
