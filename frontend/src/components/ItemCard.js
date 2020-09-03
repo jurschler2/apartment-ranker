@@ -78,7 +78,6 @@ function ItemCard({ address, price, pics, url }) {
         <RankingsForm />
        </Col>
      </Row>
-
    </Card> 
     )
   }

@@ -22,8 +22,7 @@ function RankingsForm({ rankings }) {
                         privacy: '',
                         laundry: '',
                         parking: '',
-                        livingRoom : '',
-                        houseType : ''
+                        commonSpace : ''
                       }}
        validate={values => {
          const errors = {};
@@ -38,33 +37,46 @@ function RankingsForm({ rankings }) {
      >
        {({ isSubmitting }) => (
          <Form>
-           <label>Price</label>
-           <Field type="number" name="price" />
-           <ErrorMessage name="price" component="div" />
-           <label>Location</label>
-           <Field type="number" name="location" />
-           <ErrorMessage name="location" component="div" />
-           <label>Space</label>
-           <Field type="number" name="space" />
-           <ErrorMessage name="space" component="div" />
-           <label>Privacy</label>
-           <Field type="number" name="privacy" />
-           <ErrorMessage name="privacy" component="div" />
-           <label>Laundry</label>
-           <Field type="number" name="laundry" />
-           <ErrorMessage name="laundry" component="div" />
-           <label>Parking</label>
-           <Field type="number" name="parking" />
-           <ErrorMessage name="parking" component="div" />
-           <label>Living Room</label>
-           <Field type="number" name="livingRoom" />
-           <ErrorMessage name="livingRoom" component="div" />
-           <label>House Type</label>
-           <Field type="number" name="houseType" />
-           <ErrorMessage name="houseType" component="div" />
-           <button type="submit" disabled={isSubmitting}>
-             Submit
-           </button>
+           <div className="rankingInputContainer">
+            <label>Price</label>
+            <Field type="number" name="price" />
+            <ErrorMessage name="price" component="div" />
+           </div>
+           <div className="rankingInputContainer">
+            <label>Location</label>
+            <Field type="number" name="location" />
+            <ErrorMessage name="location" component="div" />
+           </div>
+           <div className="rankingInputContainer">
+            <label>Space</label>
+            <Field type="number" name="space" />
+            <ErrorMessage name="space" component="div" />
+           </div>
+           <div className="rankingInputContainer">
+            <label>Privacy</label>
+            <Field type="number" name="privacy" />
+            <ErrorMessage name="privacy" component="div" />
+           </div>
+           <div className="rankingInputContainer">
+            <label>Laundry</label>
+            <Field type="number" name="laundry" />
+            <ErrorMessage name="laundry" component="div" />
+           </div>
+           <div className="rankingInputContainer">
+            <label>Parking</label>
+            <Field type="number" name="parking" />
+            <ErrorMessage name="parking" component="div" />
+           </div>
+           <div className="rankingInputContainer">
+            <label>Common Space</label>
+            <Field type="number" name="commonSpace" />
+            <ErrorMessage name="commonSpace" component="div" />
+           </div>
+           <div className="btn">
+            <button type="submit" disabled={isSubmitting}>
+              Submit
+            </button>
+           </div>
          </Form>
        )}
      </Formik>

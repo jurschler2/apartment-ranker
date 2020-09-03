@@ -88,8 +88,7 @@ class Rankings(db.Model):
     ranking_parking = db.Column(db.Integer, default=None)
     ranking_privacy = db.Column(db.Integer, default=None)
     ranking_laundry = db.Column(db.Integer, default=None)
-    ranking_living_room = db.Column(db.Integer, default=None)
-    ranking_house_type = db.Column(db.Integer, default=None)
+    ranking_common_space = db.Column(db.Integer, default=None)
     r_apartment_url = db.Column(db.String(145),
                                 db.ForeignKey("apartment.apartment_url"))
 
@@ -117,8 +116,7 @@ class Rankings(db.Model):
             "ranking_parking": self.ranking_id,
             "ranking_privacy": self.ranking_privacy,
             "ranking_laundry": self.ranking_laundry,
-            "ranking_living_room": self.ranking_living_room,
-            "ranking_house_type": self.ranking_house_type,
+            "ranking_common_space": self.ranking_common_space,
             "apartment_url": self.r_apartment_url,
         }
 
