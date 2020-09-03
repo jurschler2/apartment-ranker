@@ -53,7 +53,7 @@ function ItemCard({ address, price, pics, url }) {
   });
 
   return (
-   <Card className="project-container col-12">
+   <Card className="project-container col-12" data-aos="fade-right">
      <Row>
       <Col md={12} lg={4}>
         <div className="projectImageContainer">

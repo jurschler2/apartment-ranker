@@ -66,14 +66,17 @@ $cardColor: #fbfaf3;
 
 .rankingInputContainer {
   display: inline-block;
+  margin: .2rem;
 }
 
 .rankingInputContainer label {
   display: block;
+  font-size: .75rem;
 }
 
 .rankingInputContainer input {
   display: block;
+  width: 3.25rem;
 }
 
 // label, input {

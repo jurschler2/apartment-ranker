@@ -37,6 +37,7 @@ function RankingsForm({ rankings }) {
      >
        {({ isSubmitting }) => (
          <Form>
+           
            <div className="rankingInputContainer">
             <label>Price</label>
             <Field type="number" name="price" />
