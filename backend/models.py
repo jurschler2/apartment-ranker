@@ -83,12 +83,19 @@ class Rankings(db.Model):
 
     ranking_id = db.Column(db.Integer, primary_key=True)
     ranking_price = db.Column(db.Integer, default=None)
+    ranking_price_weight = db.Column(db.Numeric(7, 4), default=14.2857)
     ranking_location = db.Column(db.Integer, default=None)
+    ranking_location_weight = db.Column(db.Numeric(7, 4), default=14.2857)
     ranking_space = db.Column(db.Integer, default=None)
+    ranking_space_weight = db.Column(db.Numeric(7, 4), default=14.2857)
     ranking_parking = db.Column(db.Integer, default=None)
+    ranking_parking_weight = db.Column(db.Numeric(7, 4), default=14.2857)
     ranking_privacy = db.Column(db.Integer, default=None)
+    ranking_privacy_weight = db.Column(db.Numeric(7, 4), default=14.2857)
     ranking_laundry = db.Column(db.Integer, default=None)
+    ranking_laundry_weight = db.Column(db.Numeric(7, 4), default=14.2857)
     ranking_common_space = db.Column(db.Integer, default=None)
+    ranking_common_space_weight = db.Column(db.Numeric(7, 4), default=14.2857)
     r_apartment_url = db.Column(db.String(145),
                                 db.ForeignKey("apartment.apartment_url"))
 
@@ -111,12 +118,19 @@ class Rankings(db.Model):
         return {
             "ranking_id": self.ranking_id,
             "ranking_price": self.ranking_price,
+            "ranking_price_weight": self.ranking_price_weight,
             "ranking_location": self.ranking_location,
+            "ranking_location_weight": self.ranking_location_weight,
             "ranking_space": self.ranking_space,
+            "ranking_space_weight": self.ranking_space_weight,
             "ranking_parking": self.ranking_id,
+            "ranking_parking_weight": self.ranking_parking_weight,
             "ranking_privacy": self.ranking_privacy,
+            "ranking_privacy_weight": self.ranking_privacy_weight,
             "ranking_laundry": self.ranking_laundry,
+            "ranking_laundry_weight": self.ranking_laundry_weight,
             "ranking_common_space": self.ranking_common_space,
+            "ranking_common_space_weight": self.ranking_common_space_weight,
             "apartment_url": self.r_apartment_url,
         }
 
