@@ -44,6 +44,7 @@ function Home() {
                   price={a.apartment_price}
                   url={a.apartment_url}
                   pics={a.apartment_photos}
+                  rankings={a.apartment_rankings}
         />
       )); 
     }

@@ -17,7 +17,7 @@ import RankingsForm from "./RankingsForm";
  *  CHILDREN: 
  */
 
-function ItemCard({ address, price, pics, url }) {
+function ItemCard({ address, price, pics, url, rankings }) {
 
   const [activeIndex, setActiveIndex] = useState(0);
   const [animating, setAnimating] = useState(false);
@@ -75,7 +75,7 @@ function ItemCard({ address, price, pics, url }) {
           <p className="project-title"><strong>{price}</strong></p>
           <p>Check it out on <a href={`${url}`}>Craigslist</a>.</p>
          </div>
-        <RankingsForm />
+        <RankingsForm rankings={rankings} />
        </Col>
      </Row>
    </Card> 

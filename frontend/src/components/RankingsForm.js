@@ -1,5 +1,6 @@
 import React from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
+import { calculateAggregateRankings } from "../helpers/rankingCalculation";
 
 /**
  *  DESCRIPTION:
@@ -12,17 +13,19 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 
 function RankingsForm({ rankings }) {
 
+  const aggregateRankings = (r) = calculateAggregateRankings(r);
+
 
   return (
     <div>
      <Formik
-       initialValues={{ price: '',
-                        location: '',
-                        space: '',
-                        privacy: '',
-                        laundry: '',
-                        parking: '',
-                        commonSpace : ''
+       initialValues={{ price: rankings.rankings_price || '',
+                        location: rankings.rankings_location || '',
+                        space: rankings.rankings_space || '',
+                        privacy: rankings.rankings_privacy || '',
+                        laundry: rankings.rankings_laundry || '',
+                        parking: rankings.rankings_parking || '',
+                        commonSpace : rankings.rankings_common_space || ''
                       }}
        validate={values => {
          const errors = {};
@@ -36,8 +39,13 @@ function RankingsForm({ rankings }) {
        }}
      >
        {({ isSubmitting }) => (
+
+        // <div className="rankingInputContainer">
+        // <label>Aggregate Score</label>
+        // {}
+        // </div>
          <Form>
-           
+
            <div className="rankingInputContainer">
             <label>Price</label>
             <Field type="number" name="price" />
