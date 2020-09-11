@@ -1,5 +1,5 @@
 import axios from "axios";
-import {ADD_APARTMENT, LOAD_APARTMENTS} from "./actionTypes";
+import {ADD_APARTMENT, LOAD_APARTMENTS, UPDATE_RANKINGS} from "./actionTypes";
 
 const BASE_URL = "http://localhost:5000/apartment";
 
@@ -14,6 +14,13 @@ export function loadApartments(apartmentData) {
   return {
     type: LOAD_APARTMENTS,
     apartments: apartmentData
+  }
+}
+
+export function updateRankings(rankingsData) {
+  return {
+    type: UPDATE_RANKINGS,
+    rankings: rankingsData
   }
 }
 

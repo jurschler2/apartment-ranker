@@ -1,6 +1,7 @@
 import React from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import { calculateAggregateRankings } from "../helpers/rankingCalculation";
+import { updateRankings } from "../reducer/actions";
+
 
 /**
  *  DESCRIPTION:
@@ -13,8 +14,7 @@ import { calculateAggregateRankings } from "../helpers/rankingCalculation";
 
 function RankingsForm({ rankings }) {
 
-  const aggregateRankings = (r) = calculateAggregateRankings(r);
-
+  const dispatch = useDispatch()
 
   return (
     <div>
@@ -34,6 +34,7 @@ function RankingsForm({ rankings }) {
        onSubmit={(values, { setSubmitting }) => {
          setTimeout(() => {
            alert(JSON.stringify(values, null, 2));
+           dispatch(updateRankings(values))
            setSubmitting(false);
          }, 400);
        }}

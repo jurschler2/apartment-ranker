@@ -8,6 +8,7 @@ import {
 import { Card, Row, Col } from 'react-bootstrap';
 // import "./ItemCard.css";
 import RankingsForm from "./RankingsForm";
+import { calculateAggregateRankings } from "../helpers/rankingCalculation";
 
 /**
  *  DESCRIPTION:
@@ -21,6 +22,7 @@ function ItemCard({ address, price, pics, url, rankings }) {
 
   const [activeIndex, setActiveIndex] = useState(0);
   const [animating, setAnimating] = useState(false);
+  // const aggregateRankings = (r) = calculateAggregateRankings(r);
 
   const next = () => {
     if (animating) return;
@@ -74,6 +76,14 @@ function ItemCard({ address, price, pics, url, rankings }) {
           <p className="project-title"><strong>{address}</strong></p>
           <p className="project-title"><strong>{price}</strong></p>
           <p>Check it out on <a href={`${url}`}>Craigslist</a>.</p>
+         </div>
+         <div className="rankingInputContainer">
+           <label>
+           Aggregate Ranking:
+           </label>
+           <field>
+             {calculateAggregateRankings(rankings) || "Not Yet Ranked"}
+           </field>
          </div>
         <RankingsForm rankings={rankings} />
        </Col>

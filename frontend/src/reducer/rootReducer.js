@@ -1,4 +1,4 @@
-import { ADD_APARTMENT, LOAD_APARTMENTS } from "./actionTypes";
+import { ADD_APARTMENT, LOAD_APARTMENTS, UPDATE_RANKINGS } from "./actionTypes";
 
 import produce from "immer";
 
@@ -18,6 +18,10 @@ import produce from "immer";
 
         case LOAD_APARTMENTS:
           draft.apartments = action.apartments;
+          break;
+
+        case UPDATE_RANKINGS:
+          draft.apartments[action.rankings.apartment_url.apartment_rankings] = {... action.rankings};
           break;
 
         default:
