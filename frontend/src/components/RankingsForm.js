@@ -1,6 +1,7 @@
 import React from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { updateRankings } from "../reducer/actions";
+import { useDispatch } from "react-redux";
 
 
 /**
@@ -12,20 +13,20 @@ import { updateRankings } from "../reducer/actions";
  */
 
 
-function RankingsForm({ rankings }) {
+function RankingsForm({ url, rankings }) {
 
   const dispatch = useDispatch()
 
   return (
     <div>
      <Formik
-       initialValues={{ price: rankings.rankings_price || '',
-                        location: rankings.rankings_location || '',
-                        space: rankings.rankings_space || '',
-                        privacy: rankings.rankings_privacy || '',
-                        laundry: rankings.rankings_laundry || '',
-                        parking: rankings.rankings_parking || '',
-                        commonSpace : rankings.rankings_common_space || ''
+       initialValues={{ ranking_price: rankings.ranking_price || '',
+                        ranking_location: rankings.ranking_location || '',
+                        ranking_space: rankings.ranking_space || '',
+                        ranking_privacy: rankings.ranking_privacy || '',
+                        ranking_laundry: rankings.ranking_laundry || '',
+                        ranking_parking: rankings.ranking_parking || '',
+                        ranking_common_space : rankings.ranking_common_space || ''
                       }}
        validate={values => {
          const errors = {};
@@ -34,7 +35,7 @@ function RankingsForm({ rankings }) {
        onSubmit={(values, { setSubmitting }) => {
          setTimeout(() => {
            alert(JSON.stringify(values, null, 2));
-           dispatch(updateRankings(values))
+           dispatch(updateRankings({...values, url}))
            setSubmitting(false);
          }, 400);
        }}
@@ -49,38 +50,38 @@ function RankingsForm({ rankings }) {
 
            <div className="rankingInputContainer">
             <label>Price</label>
-            <Field type="number" name="price" />
-            <ErrorMessage name="price" component="div" />
+            <Field type="number" name="ranking_price" />
+            <ErrorMessage name="ranking_price" component="div" />
            </div>
            <div className="rankingInputContainer">
             <label>Location</label>
-            <Field type="number" name="location" />
-            <ErrorMessage name="location" component="div" />
+            <Field type="number" name="ranking_location" />
+            <ErrorMessage name="ranking_location" component="div" />
            </div>
            <div className="rankingInputContainer">
             <label>Space</label>
-            <Field type="number" name="space" />
-            <ErrorMessage name="space" component="div" />
+            <Field type="number" name="ranking_space" />
+            <ErrorMessage name="ranking_space" component="div" />
            </div>
            <div className="rankingInputContainer">
             <label>Privacy</label>
-            <Field type="number" name="privacy" />
-            <ErrorMessage name="privacy" component="div" />
+            <Field type="number" name="ranking_privacy" />
+            <ErrorMessage name="ranking_privacy" component="div" />
            </div>
            <div className="rankingInputContainer">
             <label>Laundry</label>
-            <Field type="number" name="laundry" />
-            <ErrorMessage name="laundry" component="div" />
+            <Field type="number" name="ranking_laundry" />
+            <ErrorMessage name="ranking_laundry" component="div" />
            </div>
            <div className="rankingInputContainer">
             <label>Parking</label>
-            <Field type="number" name="parking" />
-            <ErrorMessage name="parking" component="div" />
+            <Field type="number" name="ranking_parking" />
+            <ErrorMessage name="ranking_parking" component="div" />
            </div>
            <div className="rankingInputContainer">
             <label>Common Space</label>
-            <Field type="number" name="commonSpace" />
-            <ErrorMessage name="commonSpace" component="div" />
+            <Field type="number" name="ranking_common_space" />
+            <ErrorMessage name="rankings_common_space" component="div" />
            </div>
            <div className="btn">
             <button type="submit" disabled={isSubmitting}>

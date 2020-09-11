@@ -45,7 +45,9 @@ export function getApartmentsFromAPI() {
     try {
       let res = await axios.get(`${BASE_URL}/all`);
       console.log("This is the response data:", res.data.apartments)
-      dispatch(loadApartments(res.data.apartments));
+      let apartmentURLstoApartments = {};
+      res.data.apartments.forEach(a => apartmentURLstoApartments[a.apartment_url] = a)
+      dispatch(loadApartments(apartmentURLstoApartments));
     }
 
     catch(err) {

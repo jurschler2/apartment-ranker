@@ -9,6 +9,7 @@ import { Card, Row, Col } from 'react-bootstrap';
 // import "./ItemCard.css";
 import RankingsForm from "./RankingsForm";
 import { calculateAggregateRankings } from "../helpers/rankingCalculation";
+import { useDispatch, shallowEqual, useSelector } from "react-redux";
 
 /**
  *  DESCRIPTION:
@@ -22,6 +23,7 @@ function ItemCard({ address, price, pics, url, rankings }) {
 
   const [activeIndex, setActiveIndex] = useState(0);
   const [animating, setAnimating] = useState(false);
+  const ranks = useSelector(store => store.apartments[url].apartment_rankings, shallowEqual)
   // const aggregateRankings = (r) = calculateAggregateRankings(r);
 
   const next = () => {
@@ -81,11 +83,11 @@ function ItemCard({ address, price, pics, url, rankings }) {
            <label>
            Aggregate Ranking:
            </label>
-           <field>
-             {calculateAggregateRankings(rankings) || "Not Yet Ranked"}
-           </field>
+           <p>
+             {calculateAggregateRankings(ranks) || "Not Yet Ranked"}
+           </p>
          </div>
-        <RankingsForm rankings={rankings} />
+        <RankingsForm rankings={rankings} url={url} />
        </Col>
      </Row>
    </Card> 
