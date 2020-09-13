@@ -16,8 +16,8 @@ import { useDispatch } from "react-redux";
 function RankingsForm({ rankings }) {
 
   const dispatch = useDispatch()
-  const {apartment_url, ranking_id} = rankings;
-
+  const r_apartment_url = rankings.apartment_url;
+  const ranking_id = rankings.ranking_id;
   return (
     <div>
      <Formik
@@ -36,7 +36,8 @@ function RankingsForm({ rankings }) {
        onSubmit={(values, { setSubmitting }) => {
          setTimeout(() => {
            alert(JSON.stringify(values, null, 2));
-           dispatch(patchRankingsToAPI({...values, apartment_url, ranking_id}))
+           console.log("The rankings are actually being sent:", {...values, r_apartment_url, ranking_id})
+           dispatch(patchRankingsToAPI({...values, r_apartment_url, ranking_id}))
            setSubmitting(false);
          }, 400);
        }}

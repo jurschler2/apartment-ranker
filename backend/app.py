@@ -61,13 +61,16 @@ def show_specific_apartment(apartment_id):
     return output
 
 
-@app.route('/api/apartment/<int:ranking_id>', methods=["PATCH"])
+@app.route('/api/apartments/<int:ranking_id>', methods=["POST"])
 def update_rankings(ranking_id):
     """ PATCH an existing apartment's rankings """
 
     rankings = Rankings.query.get_or_404(ranking_id)
 
     updates = request.json
+    print(f"These are the updates: {updates}")
+    del(updates.ranking_id)
+    del(updates.r_apartment_url)
 
     for key in updates:
         setattr(rankings, key, updates[key])
