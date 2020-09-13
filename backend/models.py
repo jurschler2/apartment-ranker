@@ -96,6 +96,7 @@ class Rankings(db.Model):
     ranking_laundry_weight = db.Column(db.Numeric(7, 4), default=14.2857)
     ranking_common_space = db.Column(db.Integer, default=None)
     ranking_common_space_weight = db.Column(db.Numeric(7, 4), default=14.2857)
+    ranking_aggregate = db.Column(db.Numeric(5, 2), default=0.00)
     r_apartment_url = db.Column(db.String(145),
                                 db.ForeignKey("apartment.apartment_url"))
 
@@ -123,7 +124,7 @@ class Rankings(db.Model):
             "ranking_location_weight": float(self.ranking_location_weight),
             "ranking_space": self.ranking_space,
             "ranking_space_weight": float(self.ranking_space_weight),
-            "ranking_parking": self.ranking_id,
+            "ranking_parking": self.ranking_parking,
             "ranking_parking_weight": float(self.ranking_parking_weight),
             "ranking_privacy": self.ranking_privacy,
             "ranking_privacy_weight": float(self.ranking_privacy_weight),
@@ -131,6 +132,7 @@ class Rankings(db.Model):
             "ranking_laundry_weight": float(self.ranking_laundry_weight),
             "ranking_common_space": self.ranking_common_space,
             "ranking_common_space_weight": float(self.ranking_common_space_weight),
+            "ranking_aggregate": float(self.ranking_aggregate),
             "apartment_url": self.r_apartment_url,
         }
 

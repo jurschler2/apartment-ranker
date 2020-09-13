@@ -23,10 +23,10 @@ app.config['SQLALCHEMY_ECHO'] = False
 db = SQLAlchemy(app)
 db.app = app
 db.init_app(app)
-from models import Apartment
+from models import Apartment, Rankings
 
 
-@app.route('/apartment', methods=["GET"])
+@app.route('/api/apartment', methods=["GET"])
 def show_apartment(url):
     """ Return JSON object of specific apartment """
 
@@ -37,7 +37,7 @@ def show_apartment(url):
     return output
 
 
-@app.route('/apartment', methods=["POST"])
+@app.route('/api/apartments', methods=["POST"])
 def create_apartment():
     """ Return JSON object of specific apartment """
 
@@ -50,7 +50,7 @@ def create_apartment():
     return output.serialize()
 
 
-@app.route('/apartment/<int:apartment_id>', methods=["GET"])
+@app.route('/api/apartment/<int:apartment_id>', methods=["GET"])
 def show_specific_apartment(apartment_id):
     """ Return JSON object of specific apartment """
 
@@ -61,24 +61,26 @@ def show_specific_apartment(apartment_id):
     return output
 
 
-@app.route('/apartment/<int:apartment_id>', methods=["PATCH"])
-def update_rankings(apartment_id):
+@app.route('/api/apartment/<int:ranking_id>', methods=["PATCH"])
+def update_rankings(ranking_id):
     """ PATCH an existing apartment's rankings """
 
-    apt = Apartment.query.get_or_404(apartment_id)
+    rankings = Rankings.query.get_or_404(ranking_id)
 
     updates = request.json
 
     for key in updates:
-        setattr(apt, key, updates[key])
+        setattr(rankings, key, updates[key])
 
     db.session.commit()
+
+    apt = Apartment.query.get_or_404(updates.apartment_url)
 
     output = apt.serialize()
 
     return output
 
-@app.route('/apartment/all', methods=["GET"])
+@app.route('/api/apartments', methods=["GET"])
 def get_every_apartment():
     """ """
 

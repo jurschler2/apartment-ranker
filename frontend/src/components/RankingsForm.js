@@ -1,6 +1,6 @@
 import React from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import { updateRankings } from "../reducer/actions";
+import { patchRankingsToAPI } from "../reducer/actions";
 import { useDispatch } from "react-redux";
 
 
@@ -13,9 +13,10 @@ import { useDispatch } from "react-redux";
  */
 
 
-function RankingsForm({ url, rankings }) {
+function RankingsForm({ rankings }) {
 
   const dispatch = useDispatch()
+  const {apartment_url, ranking_id} = rankings;
 
   return (
     <div>
@@ -35,7 +36,7 @@ function RankingsForm({ url, rankings }) {
        onSubmit={(values, { setSubmitting }) => {
          setTimeout(() => {
            alert(JSON.stringify(values, null, 2));
-           dispatch(updateRankings({...values, url}))
+           dispatch(patchRankingsToAPI({...values, apartment_url, ranking_id}))
            setSubmitting(false);
          }, 400);
        }}
