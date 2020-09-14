@@ -21,7 +21,7 @@ import produce from "immer";
           break;
 
         case UPDATE_RANKINGS:
-          draft.apartments[action.rankings.url].apartment_rankings = {... draft.apartments[action.rankings.url].apartment_rankings, ... action.rankings};
+          draft.apartments[action.rankings.r_apartment_url].apartment_rankings = {... draft.apartments[action.rankings.r_apartment_url].apartment_rankings, ... action.rankings};
           break;
 
         default:

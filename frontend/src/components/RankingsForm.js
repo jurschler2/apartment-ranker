@@ -36,7 +36,6 @@ function RankingsForm({ rankings }) {
        onSubmit={(values, { setSubmitting }) => {
          setTimeout(() => {
            alert(JSON.stringify(values, null, 2));
-           console.log("The rankings are actually being sent:", {...values, r_apartment_url, ranking_id})
            dispatch(patchRankingsToAPI({...values, r_apartment_url, ranking_id}))
            setSubmitting(false);
          }, 400);
