@@ -39,6 +39,7 @@ function Home() {
   const renderApartmentPicsHTML = (apts) => {
 
     return apts
+      .sort((a,b) => b.apartment_rankings.ranking_aggregate - a.apartment_rankings.ranking_aggregate)
       .map(a => (
         <ItemCard address={a.apartment_address}
                   price={a.apartment_price}

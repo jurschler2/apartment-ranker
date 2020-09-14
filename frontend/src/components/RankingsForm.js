@@ -2,6 +2,7 @@ import React from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { patchRankingsToAPI } from "../reducer/actions";
 import { useDispatch } from "react-redux";
+import { calculateAggregateRankings } from "../helpers/rankingCalculation";
 
 
 /**
@@ -36,7 +37,10 @@ function RankingsForm({ rankings }) {
        onSubmit={(values, { setSubmitting }) => {
          setTimeout(() => {
            alert(JSON.stringify(values, null, 2));
-           dispatch(patchRankingsToAPI({...values, r_apartment_url, ranking_id}))
+           console.log("This is what is going into the rankings calculation:", {...rankings, ...values})
+           let ranking_aggregate = calculateAggregateRankings({...rankings, ...values})
+           console.log("This is the aggregate ranking calculated:", ranking_aggregate)
+           dispatch(patchRankingsToAPI({...values, r_apartment_url, ranking_id, ranking_aggregate}))
            setSubmitting(false);
          }, 400);
        }}
