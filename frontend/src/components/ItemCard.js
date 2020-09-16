@@ -10,6 +10,7 @@ import { Card, Row, Col } from 'react-bootstrap';
 import RankingsForm from "./RankingsForm";
 // import { calculateAggregateRankings } from "../helpers/rankingCalculation";
 import { useDispatch, shallowEqual, useSelector } from "react-redux";
+import { colorMatcher } from "../helpers/colorMatcher";
 
 /**
  *  DESCRIPTION:
@@ -23,8 +24,8 @@ function ItemCard({ address, price, pics, url, rankings }) {
 
   const [activeIndex, setActiveIndex] = useState(0);
   const [animating, setAnimating] = useState(false);
-  const ranks = useSelector(store => store.apartments[url].apartment_rankings, shallowEqual)
   const aggregateRankings = Math.round(rankings.ranking_aggregate)
+  const rankingsColor = colorMatcher(aggregateRankings) || 'black';
 
   const next = () => {
     if (animating) return;
@@ -83,7 +84,7 @@ function ItemCard({ address, price, pics, url, rankings }) {
            <label>
            Aggregate Ranking:
            </label>
-           <p>
+           <p style={{color:{rankingsColor}}}>
              {aggregateRankings|| "Not Yet Ranked"}
            </p>
          </div>

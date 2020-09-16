@@ -34,7 +34,7 @@ def get_apartment(url):
         if not output.get("error"):
             output["success"] = "Obtained pictures"
 
-        apartment_pics = []
+        apartment_pics = set()
 
         for image in apartment_pics_raw:
 
@@ -43,9 +43,9 @@ def get_apartment(url):
 
             if im[:14] == CORRECT_IMAGE_URL_START:
                 im = resize_pic(im)
-                apartment_pics.append(im)
+                apartment_pics.add(im)
 
-        output["pics"] = apartment_pics
+        output["pics"] = list(apartment_pics)
         output["price"] = apartment_price
         output["address"] = apartment_address
         output["url"] = url
