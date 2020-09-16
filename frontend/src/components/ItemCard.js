@@ -24,8 +24,7 @@ function ItemCard({ address, price, pics, url, rankings }) {
   const [activeIndex, setActiveIndex] = useState(0);
   const [animating, setAnimating] = useState(false);
   const ranks = useSelector(store => store.apartments[url].apartment_rankings, shallowEqual)
-  // const aggregateRankings = (r) = calculateAggregateRankings(r);
-  console.log("These are the rankings:", rankings);
+  const aggregateRankings = Math.round(rankings.ranking_aggregate)
 
   const next = () => {
     if (animating) return;
@@ -85,7 +84,7 @@ function ItemCard({ address, price, pics, url, rankings }) {
            Aggregate Ranking:
            </label>
            <p>
-             {rankings.ranking_aggregate|| "Not Yet Ranked"}
+             {aggregateRankings|| "Not Yet Ranked"}
            </p>
          </div>
         <RankingsForm rankings={rankings} url={url} />
