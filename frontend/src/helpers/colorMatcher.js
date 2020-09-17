@@ -7,8 +7,8 @@ export function colorMatcher(val) {
   const greaterThan90 = '#00ae00';
   const greaterThan85 = '#00ff00';
   const greaterThan80 = '	#a9ff00';
-  const greaterThan75 = '#ffff00';
-  const greaterThan70 = '#f8e000';
+  const greaterThan75 = '#f8e000';
+  const greaterThan70 = '#ffd839';
   const greaterThan65 = '#ffa900';
   const greaterThan60 = '#ff9000';
   const greaterThan55 = '#ff6900';

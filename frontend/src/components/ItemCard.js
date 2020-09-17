@@ -84,7 +84,7 @@ function ItemCard({ address, price, pics, url, rankings }) {
            <label>
            Aggregate Ranking:
            </label>
-           <p style={{color:{rankingsColor}}}>
+           <p className="aggregate-ranking" style={{color:rankingsColor}}>
              {aggregateRankings|| "Not Yet Ranked"}
            </p>
          </div>

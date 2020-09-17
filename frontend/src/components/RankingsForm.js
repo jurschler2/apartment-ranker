@@ -55,37 +55,37 @@ function RankingsForm({ rankings }) {
 
            <div className="rankingInputContainer">
             <label>Price</label>
-            <Field type="number" name="ranking_price" />
+            <Field type="number" min='1' max='100' name="ranking_price" />
             <ErrorMessage name="ranking_price" component="div" />
            </div>
            <div className="rankingInputContainer">
             <label>Location</label>
-            <Field type="number" name="ranking_location" />
+            <Field type="number" min='1' max='100' name="ranking_location" />
             <ErrorMessage name="ranking_location" component="div" />
            </div>
            <div className="rankingInputContainer">
             <label>Space</label>
-            <Field type="number" name="ranking_space" />
+            <Field type="number" min='1' max='100' name="ranking_space" />
             <ErrorMessage name="ranking_space" component="div" />
            </div>
            <div className="rankingInputContainer">
             <label>Privacy</label>
-            <Field type="number" name="ranking_privacy" />
+            <Field type="number" min='1' max='100' name="ranking_privacy" />
             <ErrorMessage name="ranking_privacy" component="div" />
            </div>
            <div className="rankingInputContainer">
             <label>Laundry</label>
-            <Field type="number" name="ranking_laundry" />
+            <Field type="number" min='1' max='100' name="ranking_laundry" />
             <ErrorMessage name="ranking_laundry" component="div" />
            </div>
            <div className="rankingInputContainer">
             <label>Parking</label>
-            <Field type="number" name="ranking_parking" />
+            <Field type="number" min='1' max='100' name="ranking_parking" />
             <ErrorMessage name="ranking_parking" component="div" />
            </div>
            <div className="rankingInputContainer">
             <label>Common Space</label>
-            <Field type="number" name="ranking_common_space" />
+            <Field type="number" min='1' max='100' name="ranking_common_space" />
             <ErrorMessage name="rankings_common_space" component="div" />
            </div>
            <div className="btn">
