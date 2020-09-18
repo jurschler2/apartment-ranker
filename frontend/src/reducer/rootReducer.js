@@ -13,7 +13,7 @@ import produce from "immer";
       switch (action.type) {
 
         case ADD_APARTMENT:
-          draft.apartments[action.apartment_url] = action.apartment;
+          draft.apartments[action.apartment.apartment_url] = action.apartment;
           break;
 
         case LOAD_APARTMENTS:

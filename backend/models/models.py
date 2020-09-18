@@ -1,7 +1,10 @@
 from app import db
 from sqlalchemy.exc import IntegrityError
 from helpers import get_apartment
+from jwt import encode
 
+
+SECRET_KEY = "secret"
 
 class Apartment(db.Model):
     """ Apartment table """
@@ -133,7 +136,7 @@ class Rankings(db.Model):
             "ranking_common_space": self.ranking_common_space,
             "ranking_common_space_weight": float(self.ranking_common_space_weight),
             "ranking_aggregate": float(self.ranking_aggregate),
-            "apartment_url": self.r_apartment_url,
+            "r_apartment_url": self.r_apartment_url,
         }
 
 
@@ -156,3 +159,41 @@ class Photo(db.Model):
         """ serialize a photo """
 
         return self.photo_url
+
+class User(db.Model):
+    """ USer Table """
+
+    __tablename__ = "user"
+
+    user_id = db.column(db.Integer, primary_key=True)
+    user_ip_address = db.column(db.String(20), unique=True)
+    user_token = db.column(db.String(55), unique=True, default=None)
+
+    def __repr__(self):
+        """ representation of the User instance."""
+
+        return f"<User {self.user_id}>"
+
+    def generate_token(self):
+        encoded_jwt = encode(
+            {"user_ip_address": self.user_ip_address},
+            SECRET_KEY,
+            algorithm="HS256",
+        )
+
+        token = encoded_jwt.decode("utf8")
+
+        return token
+
+    @classmethod
+    def create_user(cls, ip_address):
+
+        user = User(user_ip_address=ip_address)
+
+        try:
+            db.session.add(user)
+            db.session.commit()
+
+        except IntegrityError:
+            {"errors": {"ip_address":
+                        "There was a problem registering this user."}}

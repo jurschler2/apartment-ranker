@@ -61,10 +61,11 @@ export function patchRankingsToAPI(formData) {
 
     try {
       const ranking_id = formData.ranking_id
-      dispatch(updateRankings(formData))
       let res = await axios.patch(`${BASE_URL}/${ranking_id}`, {formData})
-      console.log("These are the updated rankings:",res.data);
-      console.log("This worked")
+      console.log("this is the response to update the rankings:", res.data)
+      dispatch(updateRankings(res.data.apartment_rankings))
+      
+      
 
     }
     catch (err) {
