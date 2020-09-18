@@ -1,5 +1,5 @@
-from app import db
-from models import Apartment, Rankings, Photo
+from project import db
+from project.models.models import Apartment, Rankings, Photo, User
 
 
 db.drop_all()

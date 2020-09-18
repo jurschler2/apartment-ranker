@@ -1,10 +1,8 @@
-from app import db
+from project import db, SECRET_KEY
 from sqlalchemy.exc import IntegrityError
-from helpers import get_apartment
-from jwt import encode
+from project.helpers.web_capture import get_apartment
+# from jwt import encode
 
-
-SECRET_KEY = "secret"
 
 class Apartment(db.Model):
     """ Apartment table """
@@ -40,7 +38,8 @@ class Apartment(db.Model):
                         apartment_address=new['address'],
                         apartment_price=new['price'],
                         )
-        apt_photos = [Photo(photo_url=photo, p_apartment_url=url) for photo in new['pics']]
+        apt_photos = [Photo(photo_url=photo,
+                            p_apartment_url=url) for photo in new['pics']]
 
         try:
             rankings = Rankings(r_apartment_url=apt.apartment_url)
@@ -68,7 +67,8 @@ class Apartment(db.Model):
         """ Return a dictionary of the apartment. """
 
         serialized_rankings = self.rankings.serialize_for_apartment()
-        serialized_photos = [photo.serialize_for_apartment() for photo in self.photos]
+        serialized_photos = [photo.serialize_for_apartment() for
+                             photo in self.photos]
 
         return {
             "apartment_url": self.apartment_url,
@@ -160,30 +160,31 @@ class Photo(db.Model):
 
         return self.photo_url
 
+
 class User(db.Model):
     """ USer Table """
 
     __tablename__ = "user"
 
-    user_id = db.column(db.Integer, primary_key=True)
-    user_ip_address = db.column(db.String(20), unique=True)
-    user_token = db.column(db.String(55), unique=True, default=None)
+    user_id = db.Column(db.Integer, primary_key=True)
+    user_ip_address = db.Column(db.String(20), unique=True)
+    user_token = db.Column(db.String(145), unique=True, default=None)
 
     def __repr__(self):
         """ representation of the User instance."""
 
         return f"<User {self.user_id}>"
 
-    def generate_token(self):
-        encoded_jwt = encode(
-            {"user_ip_address": self.user_ip_address},
-            SECRET_KEY,
-            algorithm="HS256",
-        )
+    # def generate_token(self):
+    #     encoded_jwt = encode(
+    #         {"user_ip_address": self.user_ip_address},
+    #         SECRET_KEY,
+    #         algorithm="HS256",
+    #     )
 
-        token = encoded_jwt.decode("utf8")
+    #     token = encoded_jwt.decode("utf8")
 
-        return token
+    #     return token
 
     @classmethod
     def create_user(cls, ip_address):
