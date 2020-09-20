@@ -36,9 +36,6 @@ def update_rankings(ranking_id):
 
     updates = request.json['formData']
 
-    del(updates['ranking_id'])
-    del(updates['r_apartment_url'])
-
     for key in updates:
         setattr(rankings, key, updates[key])
 

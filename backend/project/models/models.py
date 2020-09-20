@@ -1,7 +1,7 @@
 from project import db, SECRET_KEY
 from sqlalchemy.exc import IntegrityError
 from project.helpers.web_capture import get_apartment
-# from jwt import encode
+from jwt import encode
 
 
 class Apartment(db.Model):
@@ -175,21 +175,23 @@ class User(db.Model):
 
         return f"<User {self.user_id}>"
 
-    # def generate_token(self):
-    #     encoded_jwt = encode(
-    #         {"user_ip_address": self.user_ip_address},
-    #         SECRET_KEY,
-    #         algorithm="HS256",
-    #     )
+    @classmethod
+    def generate_token(cls, ip_address):
+        encoded_jwt = encode(
+            {"user_ip_address": ip_address},
+            SECRET_KEY,
+            algorithm="HS256",
+        )
 
-    #     token = encoded_jwt.decode("utf8")
+        token = encoded_jwt.decode("utf8")
 
-    #     return token
+        return token
 
     @classmethod
     def create_user(cls, ip_address):
 
-        user = User(user_ip_address=ip_address)
+        token = User.generate_token(ip_address)
+        user = User(user_ip_address=ip_address, user_token=token)
 
         try:
             db.session.add(user)
