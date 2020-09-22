@@ -2,11 +2,13 @@
 from project import db
 from flask import request, Blueprint
 from project.models.models import Apartment, Rankings
+from project.helpers.decorators import jwt_required
 
 apartment_ranker_api = Blueprint("apartment_ranker_api", __name__)
 
 
 @apartment_ranker_api.route('/api/apartments', methods=["POST"])
+@jwt_required
 def create_apartment():
     """ Return JSON object of specific apartment """
 
@@ -29,6 +31,7 @@ def show_specific_apartment(apartment_id):
 
 
 @apartment_ranker_api.route('/api/apartments/<int:ranking_id>', methods=["PATCH"])
+@jwt_required
 def update_rankings(ranking_id):
     """ PATCH an existing apartment's rankings """
 
@@ -49,6 +52,7 @@ def update_rankings(ranking_id):
 
 
 @apartment_ranker_api.route('/api/apartments', methods=["GET"])
+@jwt_required
 def get_every_apartment():
     """ """
 

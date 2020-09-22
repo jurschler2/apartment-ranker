@@ -2,6 +2,7 @@ from project import db, SECRET_KEY
 from sqlalchemy.exc import IntegrityError
 from project.helpers.web_capture import get_apartment
 from jwt import encode
+from datetime import datetime
 
 
 class Apartment(db.Model):
@@ -168,17 +169,17 @@ class User(db.Model):
 
     user_id = db.Column(db.Integer, primary_key=True)
     user_ip_address = db.Column(db.String(20), unique=True)
-    user_token = db.Column(db.String(145), unique=True, default=None)
+    user_created = db.Column(db.DateTime, default=datetime.utcnow)
+    user_last_access = db.Column(db.DateTime, default=datetime.utcnow)
 
     def __repr__(self):
         """ representation of the User instance."""
 
         return f"<User {self.user_id}>"
 
-    @classmethod
-    def generate_token(cls, ip_address):
+    def generate_token(self):
         encoded_jwt = encode(
-            {"user_ip_address": ip_address},
+            {"user_ip_address": self.user_ip_address},
             SECRET_KEY,
             algorithm="HS256",
         )
@@ -187,11 +188,21 @@ class User(db.Model):
 
         return token
 
+    def serialize(self):
+        token = self.generate_token()
+
+        return {
+            "token": token,
+            "user": {
+                     "user_ip_address": self.user_ip_address,
+                     "user_last_access": self.user_last_access, 
+                     },
+        }
+
     @classmethod
     def create_user(cls, ip_address):
 
-        token = User.generate_token(ip_address)
-        user = User(user_ip_address=ip_address, user_token=token)
+        user = User(user_ip_address=ip_address)
 
         try:
             db.session.add(user)
