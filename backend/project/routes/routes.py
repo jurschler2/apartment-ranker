@@ -1,7 +1,7 @@
 """ Routes to show apartments """
 from project import db
 from flask import request, Blueprint
-from project.models.models import Apartment, Rankings
+from project.models.models import Apartment, Rankings, User
 from project.helpers.decorators import jwt_required
 
 apartment_ranker_api = Blueprint("apartment_ranker_api", __name__)
@@ -59,3 +59,23 @@ def get_every_apartment():
     output = Apartment.get_all_apartments()
 
     return output
+
+
+@apartment_ranker_api.route('/api/users/signup', methods=["POST"])
+def generate_user():
+    """ """
+
+    user = User.create_user(ip_address=request.remote_addr)
+
+    if isinstance(user, User):
+        return user.serialize()
+
+    return (user, 400)
+
+
+@apartment_ranker_api.route('api/users/confirm', METHODS=["GET"])
+@jwt_required
+def confirm_user():
+    """ """
+
+    return {"status": "confirmed"}

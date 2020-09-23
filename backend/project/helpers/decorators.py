@@ -16,7 +16,10 @@ def put_jwt_into_g():
     token = request.headers.get("Authorization")
     try:
         decoded = decode(token, SECRET_KEY, algorithms=["HS256"])
-        g.user = User.query.filter_by(email=decoded["email"]).first()
+        if decoded["user_ip_address"] == request.remote_addr:
+            g.user = User.query.filter_by(user_ip_address=decoded["user_ip_address"]).first()
+        else:
+            g.user = None
     except (InvalidSignatureError, DecodeError):
         g.user = None
 
@@ -32,7 +35,7 @@ def jwt_required(fn):
     def wrapper(*args, **kwargs):
         put_jwt_into_g()
         if g.user is None:
-            return make_error("Please log in", 401)
+            return make_error("User not found.", 401)
         return fn(*args, **kwargs)
 
     return wrapper

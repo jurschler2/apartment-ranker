@@ -163,9 +163,9 @@ class Photo(db.Model):
 
 
 class User(db.Model):
-    """ USer Table """
+    """ User Table """
 
-    __tablename__ = "user"
+    __tablename__ = "users"
 
     user_id = db.Column(db.Integer, primary_key=True)
     user_ip_address = db.Column(db.String(20), unique=True)
@@ -195,7 +195,7 @@ class User(db.Model):
             "token": token,
             "user": {
                      "user_ip_address": self.user_ip_address,
-                     "user_last_access": self.user_last_access, 
+                     "user_last_access": self.user_last_access,
                      },
         }
 
@@ -211,3 +211,5 @@ class User(db.Model):
         except IntegrityError:
             {"errors": {"ip_address":
                         "There was a problem registering this user."}}
+
+        return user
