@@ -7,7 +7,7 @@ const AUTH_BASE_URL = "http://localhost:5000/api/users";
  *
  * - adds JWT from localStorage to axios default Authorization header
  */
-const setAuthHeader = () => {
+export const setAuthHeader = () => {
   if (window?.localStorage?.getItem("_token")) {
     axios.defaults.headers.common["Authorization"] = localStorage.getItem(
       "_token"
@@ -21,7 +21,7 @@ const setAuthHeader = () => {
  * - checks localStorage for a key of _token
  * - This does no validation, it merely checks localStorage
  */
-const checkToken = () => {
+export const checkToken = () => {
   if (localStorage.getItem("_token")) return true;
   return false;
 };
@@ -35,7 +35,7 @@ const checkToken = () => {
  *   {status}
  * }
  */
-const verifyToken = async () => {
+export const verifyToken = async () => {
   if (!localStorage.getItem("_token")) {
     return { status: "error", message: "This is an incorrect token." };
   }
@@ -44,7 +44,7 @@ const verifyToken = async () => {
 };
 
 
-const signup = async () => {
+export const signup = async () => {
 
   const res = await axios.post(`${AUTH_BASE_URL}/signup`);
 

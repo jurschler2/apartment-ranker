@@ -14,6 +14,8 @@ class Apartment(db.Model):
     apartment_url = db.Column(db.String(145), primary_key=True, unique=True)
     apartment_address = db.Column(db.String(145), default=None)
     apartment_price = db.Column(db.String(8), default=None)
+    a_user_ip_address = db.Column(db.String(20),
+                                  db.ForeignKey("users.user_ip_address"))
     rankings = db.relationship("Rankings",
                                backref=db.backref('apartment'), uselist=False)
     photos = db.relationship("Photo",
@@ -25,7 +27,7 @@ class Apartment(db.Model):
         return f"<Apartment {self.apartment_url}>"
 
     @classmethod
-    def add_apartment(cls, url):
+    def add_apartment(cls, url, ip_address):
         """
         Add a new apartment to the database.
 
@@ -38,12 +40,14 @@ class Apartment(db.Model):
         apt = Apartment(apartment_url=url,
                         apartment_address=new['address'],
                         apartment_price=new['price'],
+                        a_user_ip_address=ip_address
                         )
         apt_photos = [Photo(photo_url=photo,
                             p_apartment_url=url) for photo in new['pics']]
 
         try:
-            rankings = Rankings(r_apartment_url=apt.apartment_url)
+            rankings = Rankings(r_apartment_url=apt.apartment_url,
+                                r_user_ip_address=ip_address)
             db.session.add(apt)
             db.session.add(rankings)
             db.session.add_all(apt_photos)
@@ -55,10 +59,10 @@ class Apartment(db.Model):
         return apt
 
     @classmethod
-    def get_all_apartments(cls):
+    def get_all_apartments(cls, ip_address):
         """ Return a serialized object of all apartments """
 
-        apartments = Apartment.query.all()
+        apartments = Apartment.query.filter_by(a_user_ip_address=ip_address)
 
         output = [apt.serialize() for apt in apartments]
 
@@ -103,6 +107,8 @@ class Rankings(db.Model):
     ranking_aggregate = db.Column(db.Numeric(5, 2), default=0.00)
     r_apartment_url = db.Column(db.String(145),
                                 db.ForeignKey("apartment.apartment_url"))
+    r_user_ip_address = db.Column(db.String(20),
+                                  db.ForeignKey("users.user_ip_address"))
 
     def __repr__(self):
         """ representation of Rankings instance."""
@@ -167,15 +173,16 @@ class User(db.Model):
 
     __tablename__ = "users"
 
-    user_id = db.Column(db.Integer, primary_key=True)
-    user_ip_address = db.Column(db.String(20), unique=True)
+    user_ip_address = db.Column(db.String(20), primary_key=True, unique=True)
     user_created = db.Column(db.DateTime, default=datetime.utcnow)
     user_last_access = db.Column(db.DateTime, default=datetime.utcnow)
+    apartments = db.relationship("Apartment",
+                                 backref=db.backref('users'), uselist=True)
 
     def __repr__(self):
         """ representation of the User instance."""
 
-        return f"<User {self.user_id}>"
+        return f"<User {self.user_ip_address  }>"
 
     def generate_token(self):
         encoded_jwt = encode(

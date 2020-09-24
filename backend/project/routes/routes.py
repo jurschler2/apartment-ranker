@@ -1,6 +1,6 @@
 """ Routes to show apartments """
 from project import db
-from flask import request, Blueprint
+from flask import request, Blueprint, g
 from project.models.models import Apartment, Rankings, User
 from project.helpers.decorators import jwt_required
 
@@ -56,7 +56,7 @@ def update_rankings(ranking_id):
 def get_every_apartment():
     """ """
 
-    output = Apartment.get_all_apartments()
+    output = Apartment.get_all_apartments(ip_address=g.user.user_ip_address)
 
     return output
 
