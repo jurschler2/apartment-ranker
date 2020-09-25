@@ -22,7 +22,7 @@ def get_apartment(url):
     try:
         apartment_pics_raw = driver.find_elements_by_tag_name('img')
         apartment_price = driver.find_element_by_class_name('price').text
-        apartment_address = driver.find_element_by_class_name('mapaddress').text
+        apartment_address = driver.find_element_by_class_name('mapaddress').text or ""
 
     except TimeoutException:
         output["error"] = "Form data took too long to load"

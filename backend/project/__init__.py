@@ -36,4 +36,4 @@ db = SQLAlchemy(app)
 
 from project.routes.routes import apartment_ranker_api
 
-app.register_blueprint(apartment_ranker_api)
+app.register_blueprint(apartment_ranker_api, url_prefix="")

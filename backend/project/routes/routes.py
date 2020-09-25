@@ -14,7 +14,7 @@ def create_apartment():
 
     new_apt_url = request.json['url']
 
-    output = Apartment.add_apartment(url=new_apt_url)
+    output = Apartment.add_apartment(url=new_apt_url, ip_address=g.user.user_ip_address)
 
     return output.serialize()
 
@@ -73,7 +73,7 @@ def generate_user():
     return (user, 400)
 
 
-@apartment_ranker_api.route('api/users/confirm', METHODS=["GET"])
+@apartment_ranker_api.route('/api/users/confirm', methods=["GET"])
 @jwt_required
 def confirm_user():
     """ """
