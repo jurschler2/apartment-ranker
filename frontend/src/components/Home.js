@@ -31,11 +31,18 @@ function Home() {
     function PopulateApartments() {
       if (apartments) {
         setIsLoading(false);
-        console.log("These are the apartments:", apartments)
       }
     }, [apartments]
   );
 
+
+  /*TODO: Add in components for the initial homepage and the demo GIF.
+  * Initial Component could be an AOS timer that has a message that goes away or something?
+  * GIF component should be a container which will just hold the file.
+  * File still needs to be made once all styling has taken place
+  */
+
+  // TODO: Make this into a component
   const renderApartmentPicsHTML = (apts) => {
 
     return apts
@@ -55,6 +62,7 @@ function Home() {
       return <p>Loading</p>;
     }
     
+
     return (
     <> 
      <Container className="sectionContainer" id="/apartments">
