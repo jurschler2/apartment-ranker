@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
-import ItemCard from "./ItemCard";
-import RankingsForm from './RankingsForm';
+import InitialHomeLoad from "./InitialHomeLoad";
+import HomeDemo from "./HomeDemo";
+import ItemList from "./ItemList";
 import NewApartmentForm from './NewApartmentForm';
 import { useDispatch, shallowEqual, useSelector } from "react-redux";
 import { getApartmentsFromAPI } from "../reducer/actions";
@@ -42,21 +43,21 @@ function Home() {
   * File still needs to be made once all styling has taken place
   */
 
-  // TODO: Make this into a component
-  const renderApartmentPicsHTML = (apts) => {
+  // TODO: Make this into a component; keeping this code for now in case tbe component isnt implemented properly
+  // const renderApartmentPicsHTML = (apts) => {
 
-    return apts
-      .sort((a,b) => b.apartment_rankings.ranking_aggregate - a.apartment_rankings.ranking_aggregate)
-      .map(a => (
-        <ItemCard address={a.apartment_address}
-                  price={a.apartment_price}
-                  url={a.apartment_url}
-                  pics={a.apartment_photos}
-                  rankings={a.apartment_rankings}
-                  key={a.apartment_url}
-        />
-      )); 
-    }
+  //   return apts
+  //     .sort((a,b) => b.apartment_rankings.ranking_aggregate - a.apartment_rankings.ranking_aggregate)
+  //     .map(a => (
+  //       <ItemCard address={a.apartment_address}
+  //                 price={a.apartment_price}
+  //                 url={a.apartment_url}
+  //                 pics={a.apartment_photos}
+  //                 rankings={a.apartment_rankings}
+  //                 key={a.apartment_url}
+  //       />
+  //     )); 
+  //   }
     
     if (isLoading) {
       return <p>Loading</p>;
@@ -74,7 +75,9 @@ function Home() {
        <Row>
          <Col md={12} lg={12}>
           <div className="itemCardContainer">
-            {!apartments ? <p>No pics yet</p> : renderApartmentPicsHTML(apartments) }
+            {!apartments
+              ? <p>No pics yet</p>
+              : <ItemList apartments={apartments} /> }
           </div>
          </Col>
        </Row>
