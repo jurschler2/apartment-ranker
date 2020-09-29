@@ -57,6 +57,7 @@ function Home() {
   //                 key={a.apartment_url}
   //       />
   //     )); 
+  //
   //   }
     
     if (isLoading) {
