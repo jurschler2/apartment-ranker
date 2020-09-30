@@ -44,7 +44,7 @@ export const verifyToken = async () => {
 };
 
 
-export const signup = async () => {
+export const generateToken = async () => {
 
   const res = await axios.post(`${AUTH_BASE_URL}/signup`);
 

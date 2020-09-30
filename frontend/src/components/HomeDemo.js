@@ -4,7 +4,12 @@ function HomeDemo() {
 
   return (
     <div>
-      HomeDemo
+      <p>
+        How it works:
+      </p>
+      <div>
+        * insert GIF here *
+      </div>
     </div>
   );
 
