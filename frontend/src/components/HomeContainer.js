@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { checkToken } from "../helpers/auth";
 import InitialHomeLoad from "./InitialHomeLoad";
+import Home from "./Home";
 
 function HomeContainer() {
 
@@ -10,14 +11,22 @@ function HomeContainer() {
 
   useEffect(
     function checkForToken() {
-      token = checkToken();
+      if(checkToken()) setCreatedUser(true)
     }, [createdUser]
   );
 
+  const handleMoveToNext = () => {
+
+    console.log("Do we even get in here?")
+
+    setCreatedUser(true);
+
+  }
+
   return (
     <>
-    {!token 
-      ? <InitialHomeLoad />
+    {!createdUser 
+      ? <InitialHomeLoad moveToNext={handleMoveToNext} />
       : <Home />}
     </>  
   );

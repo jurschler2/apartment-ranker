@@ -1,6 +1,6 @@
 import React from "react";
 import {Switch, Route, Redirect} from "react-router-dom";
-import Home from "./Home";
+import HomeContainer from "./HomeContainer";
 
 
 
@@ -19,7 +19,7 @@ function Routes() {
       <div>
         <Switch>
           <Route exact path="/">
-            <Home />
+            <HomeContainer />
           </Route>
           <Redirect to="/"/>
         </Switch>

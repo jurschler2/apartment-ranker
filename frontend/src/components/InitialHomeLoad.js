@@ -2,13 +2,15 @@ import React, { useEffect } from "react";
 import { generateToken } from "../helpers/auth";
 import HomeDemo from "./HomeDemo";
 
-function InitialHomeLoad() {
+function InitialHomeLoad({ moveToNext }) {
 
 
 
-  useEffect(
+  useEffect(() => {
     async function createOrFindUser() {
       await generateToken();
+    }
+    createOrFindUser()
     }, []
   )
 
@@ -23,7 +25,7 @@ function InitialHomeLoad() {
         </h5>
       </div>
       <div>
-        <HomeDemo />
+        <HomeDemo moveToNext={moveToNext}/>
       </div>
     </div>
   );

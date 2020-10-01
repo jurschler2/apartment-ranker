@@ -1,6 +1,7 @@
 import React from "react";
+import {Button} from "react-bootstrap";
 
-function HomeDemo() {
+function HomeDemo({ moveToNext }) {
 
   return (
     <div>
@@ -10,6 +11,7 @@ function HomeDemo() {
       <div>
         * insert GIF here *
       </div>
+      <button type="button" onClick={moveToNext}>Try it</button>
     </div>
   );
 

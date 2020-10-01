@@ -22,7 +22,12 @@ export const setAuthHeader = () => {
  * - This does no validation, it merely checks localStorage
  */
 export const checkToken = () => {
-  if (localStorage.getItem("_token")) return true;
+  if (localStorage.getItem("_token")) {
+    
+    //TODO: Setting header now just for proof of concept, to remove
+    setAuthHeader();
+    return true
+  };
   return false;
 };
 
@@ -48,8 +53,8 @@ export const generateToken = async () => {
 
   const res = await axios.post(`${AUTH_BASE_URL}/signup`);
 
-  if (res.status === "success") {
-    localStorage.setItem("_token", res.message.token);
+  if (res.status === 200) {
+    localStorage.setItem("_token", res.data.token);
     setAuthHeader();
   }
 }
