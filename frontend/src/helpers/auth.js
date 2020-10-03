@@ -58,3 +58,6 @@ export const generateToken = async () => {
     setAuthHeader();
   }
 }
+
+//TODO: add a method that checks whether there is an existing account - could be that this is just an add to the generateToken method.
+//      flow of it could be - check for token, if token, verify, if invalid, generateToken which either gets from existing account or registers
