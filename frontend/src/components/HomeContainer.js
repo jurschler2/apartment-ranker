@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { checkToken } from "../helpers/auth";
+import { checkToken, verifyToken } from "../helpers/auth";
 import InitialHomeLoad from "./InitialHomeLoad";
 import Home from "./Home";
 
@@ -7,20 +7,31 @@ function HomeContainer() {
 
   // On initial load, check for a token to determine which component to render
   const [createdUser, setCreatedUser] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
 
-  useEffect(
-    function checkForToken() {
-      if(checkToken()) setCreatedUser(true)
-    }, [createdUser]
+  useEffect(() => {
+    async function checkForToken() {
+      if(checkToken()) {
+        if (await verifyToken()) {
+          setCreatedUser(true)
+        }
+      }
+    }
+    checkForToken();
+    setIsLoading(false);
+  }, [createdUser]
   );
 
   const handleMoveToNext = () => {
 
-    console.log("Do we even get in here?")
-
     setCreatedUser(true);
 
+  }
+
+   
+  if (isLoading) {
+    return <p>Loading</p>;
   }
 
   return (

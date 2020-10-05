@@ -79,3 +79,15 @@ def confirm_user():
     """ """
 
     return {"status": "confirmed"}
+
+
+@apartment_ranker_api.route('/api/users/check', methods=["GET"])
+def check_user():
+    """ """
+
+    user = User.query.filter_by(user_ip_address=request.remote_addr)[0]
+
+    if isinstance(user, User):
+        return user.serialize()
+
+    return {"status": "no existing user."}

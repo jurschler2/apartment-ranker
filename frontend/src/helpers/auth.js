@@ -24,7 +24,6 @@ export const setAuthHeader = () => {
 export const checkToken = () => {
   if (localStorage.getItem("_token")) {
     
-    //TODO: Setting header now just for proof of concept, to remove
     setAuthHeader();
     return true
   };
@@ -42,21 +41,44 @@ export const checkToken = () => {
  */
 export const verifyToken = async () => {
   if (!localStorage.getItem("_token")) {
-    return { status: "error", message: "This is an incorrect token." };
+    return { status: "error", message: "No token found." };
   }
 
-  return await axios.get(`${AUTH_BASE_URL}/confirm`);
+  let res = await axios.get(`${AUTH_BASE_URL}/confirm`)
+  if (res.status === "confirmed") {
+    return true;
+  } else {
+    return false
+  }
 };
 
+export const checkUser = async () => {
 
-export const generateToken = async () => {
-
-  const res = await axios.post(`${AUTH_BASE_URL}/signup`);
+  const res = await axios.get(`${AUTH_BASE_URL}/check`);
 
   if (res.status === 200) {
     localStorage.setItem("_token", res.data.token);
     setAuthHeader();
+    return true;
   }
+  return false;
+}
+
+
+export const generateToken = async () => {
+
+  const existingUser = await checkUser();
+
+  if (!existingUser) {
+    
+    const res = await axios.post(`${AUTH_BASE_URL}/signup`);
+  
+    if (res.status === 200) {
+      localStorage.setItem("_token", res.data.token);
+      setAuthHeader();
+    }
+  }
+
 }
 
 //TODO: add a method that checks whether there is an existing account - could be that this is just an add to the generateToken method.
