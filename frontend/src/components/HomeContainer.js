@@ -6,10 +6,9 @@ import Home from "./Home";
 function HomeContainer() {
 
   // On initial load, check for a token to determine which component to render
-  const [createdUser, setCreatedUser] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
 
 
+// TODO: add a helper hook that handles the auth calls
   useEffect(() => {
     async function checkForToken() {
       if(checkToken()) {
@@ -36,7 +35,7 @@ function HomeContainer() {
 
   return (
     <>
-    {!createdUser 
+    {!error 
       ? <InitialHomeLoad moveToNext={handleMoveToNext} />
       : <Home />}
     </>  

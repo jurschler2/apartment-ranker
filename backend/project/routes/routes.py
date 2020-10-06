@@ -14,7 +14,11 @@ def create_apartment():
 
     new_apt_url = request.json['url']
 
+    print(f"This is the g-user: {g.user.user_ip_address}")
+
     output = Apartment.add_apartment(url=new_apt_url, ip_address=g.user.user_ip_address)
+
+    print(f"This is the pre-serialize output: {output}")
 
     return output.serialize()
 

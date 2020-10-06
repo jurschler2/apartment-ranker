@@ -1,4 +1,4 @@
-import { ADD_APARTMENT, LOAD_APARTMENTS, UPDATE_RANKINGS } from "./actionTypes";
+import { ADD_APARTMENT, LOAD_APARTMENTS, LOAD_USER, UPDATE_RANKINGS } from "./actionTypes";
 
 import produce from "immer";
 
@@ -6,7 +6,7 @@ import produce from "immer";
  *  state = {}
  */
 
- const INITIAL_STATE = {apartments: []};
+ const INITIAL_STATE = {apartments: [], user: {}};
 
  const rootReducer = (state=INITIAL_STATE, action) =>
     produce(state, draft => {
@@ -23,6 +23,10 @@ import produce from "immer";
         case UPDATE_RANKINGS:
           draft.apartments[action.rankings.r_apartment_url].apartment_rankings = {... draft.apartments[action.rankings.r_apartment_url].apartment_rankings, ... action.rankings};
           break;
+
+        case LOAD_USER:
+          draft.user = action.user;
+          break;  
 
         default:
           return draft;  
