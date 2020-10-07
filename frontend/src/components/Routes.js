@@ -15,6 +15,9 @@ import HomeContainer from "./HomeContainer";
 function Routes() {
 
 
+// TODO: Move the useAPI call for token verification to here and render the initial load items above
+// the switch below?
+
   return (
       <div>
         <Switch>

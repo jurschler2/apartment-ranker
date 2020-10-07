@@ -1,30 +1,33 @@
 import React, { useEffect, useState } from "react";
 import { checkToken, verifyToken } from "../helpers/auth";
+import useAPI from "../helpers/useAPI";
 import InitialHomeLoad from "./InitialHomeLoad";
 import Home from "./Home";
 
 function HomeContainer() {
 
   // On initial load, check for a token to determine which component to render
+  const [isLoading, error] = useAPI(verifyToken);
+
 
 
 // TODO: add a helper hook that handles the auth calls
-  useEffect(() => {
-    async function checkForToken() {
-      if(checkToken()) {
-        if (await verifyToken()) {
-          setCreatedUser(true)
-        }
-      }
-    }
-    checkForToken();
-    setIsLoading(false);
-  }, [createdUser]
-  );
+  // useEffect(() => {
+  //   async function checkForToken() {
+  //     if(checkToken()) {
+  //       if (await verifyToken()) {
+  //         setCreatedUser(true)
+  //       }
+  //     }
+  //   }
+  //   checkForToken();
+  //   setIsLoading(false);
+  // }, [createdUser]
+  // );
 
   const handleMoveToNext = () => {
 
-    setCreatedUser(true);
+    // setCreatedUser(true);
 
   }
 
