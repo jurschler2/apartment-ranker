@@ -60,6 +60,8 @@ def update_rankings(ranking_id):
 def get_every_apartment():
     """ """
 
+    print("Do we even get in here for all apartments?")
+
     output = Apartment.get_all_apartments(ip_address=g.user.user_ip_address)
 
     return output
@@ -89,7 +91,9 @@ def confirm_user():
 def check_user():
     """ """
 
-    user = User.query.filter_by(user_ip_address=request.remote_addr)[0]
+    user = User.query.get(request.remote_addr)
+
+    print(f"This is the user {user}")
 
     if isinstance(user, User):
         return user.serialize()

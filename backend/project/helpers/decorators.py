@@ -13,6 +13,7 @@ def make_error(message, code):
 def put_jwt_into_g():
     """ Function for grabbing the token out of the header,
     for when you don't need to error if the user isn't logged in """
+    print(f"These are the request headers: {request.headers}")
     token = request.headers.get("Authorization")
     try:
         decoded = decode(token, SECRET_KEY, algorithms=["HS256"])
@@ -30,6 +31,8 @@ def jwt_required(fn):
     If valid, attaches current user instance to g.user.
     Otherwise, issues a response with a 401 status code.
     """
+
+    print("Clearly we get in here and it fails on the get for all apartments")
 
     @wraps(fn)
     def wrapper(*args, **kwargs):

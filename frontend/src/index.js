@@ -5,6 +5,9 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import 'bootstrap/dist/css/bootstrap.css';
 import './styles/styles.scss'
+import { setAuthHeader } from './helpers/auth';
+
+setAuthHeader();
 
 ReactDOM.render(
   <React.StrictMode>

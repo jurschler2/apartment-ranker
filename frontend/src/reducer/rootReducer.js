@@ -6,7 +6,7 @@ import produce from "immer";
  *  state = {}
  */
 
- const INITIAL_STATE = {apartments: [], user: {}};
+ const INITIAL_STATE = {apartments: []};
 
  const rootReducer = (state=INITIAL_STATE, action) =>
     produce(state, draft => {
@@ -24,9 +24,9 @@ import produce from "immer";
           draft.apartments[action.rankings.r_apartment_url].apartment_rankings = {... draft.apartments[action.rankings.r_apartment_url].apartment_rankings, ... action.rankings};
           break;
 
-        case LOAD_USER:
-          draft.user = action.user;
-          break;  
+        // case LOAD_USER:
+        //   draft.user = action.user;
+        //   break;  
 
         default:
           return draft;  

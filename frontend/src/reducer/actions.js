@@ -51,6 +51,7 @@ export function getApartmentsFromAPI() {
 
     try {
       let res = await axios.get(BASE_URL);
+      console.log("This is the response for all apartments:", res)
     
       let apartmentURLstoApartments = {};
       res.data.apartments.forEach(a => apartmentURLstoApartments[a.apartment_url] = a)

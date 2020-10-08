@@ -43,6 +43,7 @@ export const verifyToken = async () => {
   if (!localStorage.getItem("_token")) {
     return { status: "error", message: "No token found." };
   }
+  setAuthHeader();
 
   let res = await axios.get(`${AUTH_BASE_URL}/confirm`)
   if (res.status === "confirmed") {
@@ -55,8 +56,9 @@ export const verifyToken = async () => {
 export const checkUser = async () => {
 
   const res = await axios.get(`${AUTH_BASE_URL}/check`);
+  console.log("This is the response to check:", res)
 
-  if (res.status === 200) {
+  if (res.data.token) {
     localStorage.setItem("_token", res.data.token);
     setAuthHeader();
     return true;
@@ -68,6 +70,8 @@ export const checkUser = async () => {
 export const generateToken = async () => {
 
   const existingUser = await checkUser();
+
+  console.log("This is the existing user check:", existingUser)
 
   if (!existingUser) {
     

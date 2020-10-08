@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { checkToken, verifyToken } from "../helpers/auth";
+import { checkToken, verifyToken, generateToken } from "../helpers/auth";
 import useAPI from "../helpers/useAPI";
 import InitialHomeLoad from "./InitialHomeLoad";
 import Home from "./Home";
 
-function HomeContainer() {
+
+function HomeContainer({user}) {
 
   // On initial load, check for a token to determine which component to render
-  const [isLoading, error] = useAPI(verifyToken);
-
 
 
 // TODO: add a helper hook that handles the auth calls
@@ -24,21 +23,18 @@ function HomeContainer() {
   //   setIsLoading(false);
   // }, [createdUser]
   // );
+  const [haveToken, setHaveToken] = useState(false)
 
   const handleMoveToNext = () => {
 
-    // setCreatedUser(true);
+    generateToken();
+    setHaveToken(true);
 
-  }
-
-   
-  if (isLoading) {
-    return <p>Loading</p>;
   }
 
   return (
     <>
-    {!error 
+    {(!haveToken && !user)
       ? <InitialHomeLoad moveToNext={handleMoveToNext} />
       : <Home />}
     </>  
