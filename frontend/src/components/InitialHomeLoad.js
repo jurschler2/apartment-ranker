@@ -2,17 +2,16 @@ import React, { useEffect } from "react";
 import { generateToken } from "../helpers/auth";
 import HomeDemo from "./HomeDemo";
 
+/**
+ *  DESCRIPTION: Component that contains information for a session's initial visit to the site. Renders the HomeDemo component containing the GIF and ability for session to
+ *               generate a valid token.
+ *  PROPS: moveToNext (Function)
+ *  FLOW: App => Routes => HomeContainer => InitialHomeLoad
+ *  PARENT: HomeContainer
+ *  CHILDREN: HomeDemo
+ */
+
 function InitialHomeLoad({ moveToNext }) {
-
-
-
-  useEffect(() => {
-    async function createOrFindUser() {
-      await generateToken();
-    }
-    createOrFindUser()
-    }, []
-  )
 
   return (
     <div>
@@ -29,7 +28,6 @@ function InitialHomeLoad({ moveToNext }) {
       </div>
     </div>
   );
-
 }
 
 export default InitialHomeLoad;

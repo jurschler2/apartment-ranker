@@ -10,16 +10,12 @@ import useAPI from "../helpers/useAPI";
  *  DESCRIPTION:
  *  PROPS: None
  *  FLOW: App => Routes
- *  PARENT: Routes
- *  CHILDREN:
+ *  PARENT: App
+ *  CHILDREN: HomeContainer
  */
 
 function Routes() {
   const [isLoading, error] = useAPI(verifyToken);
-
-  // if (isLoading) {
-  //   return <p>Loading</p>;
-  // }
 
   let user;
 
@@ -29,15 +25,11 @@ function Routes() {
     user = true;
   }
 
-
-// TODO: Move the useAPI call for token verification to here and render the initial load items above
-// the switch below?
-
   return (
       <div>
         <Switch>
           <Route exact path="/">
-            <HomeContainer user={user}/>
+            <HomeContainer createdUser={user}/>
           </Route>
           <Redirect to="/"/>
         </Switch>

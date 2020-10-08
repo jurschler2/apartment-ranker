@@ -1,6 +1,14 @@
 import React from "react";
 import {Button} from "react-bootstrap";
 
+/**
+ *  DESCRIPTION: Component that renders a GIF showing how to use the site. Contains a button which invokes the creation of a token.
+ *  PROPS: moveToNext (Function)
+ *  FLOW: App => Routes => HomeContainer => InitialHomeLoad => HomeDemo
+ *  PARENT: InitialHomeLoad
+ *  CHILDREN: N/A
+ */
+
 function HomeDemo({ moveToNext }) {
 
   return (
