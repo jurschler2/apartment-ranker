@@ -6,18 +6,15 @@ import {
   CarouselIndicators
 } from 'reactstrap';
 import { Card, Row, Col } from 'react-bootstrap';
-// import "./ItemCard.css";
 import RankingsForm from "./RankingsForm";
-// import { calculateAggregateRankings } from "../helpers/rankingCalculation";
-import { useDispatch, shallowEqual, useSelector } from "react-redux";
 import { colorMatcher } from "../helpers/colorMatcher";
 
 /**
- *  DESCRIPTION:
- *  PROPS: 
- *  FLOW: 
- *  PARENT: 
- *  CHILDREN: 
+ *  DESCRIPTION: Accepts numerous properties for an apartment and renders the UX of an apartment as well as its RankingsForm.
+ *  PROPS: address (String), price (String), pics (Array), url (String), rankings (Object) 
+ *  FLOW: App => Routes => HomeContainer => Home => ItemList => ItemCard
+ *  PARENT: ItemList
+ *  CHILDREN: RankingsForm
  */
 
 function ItemCard({ address, price, pics, url, rankings }) {

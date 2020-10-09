@@ -4,11 +4,10 @@ import HomeContainer from "./HomeContainer";
 import { verifyToken } from "../helpers/auth";
 import useAPI from "../helpers/useAPI";
 
-
-
 /**
- *  DESCRIPTION:
- *  PROPS: None
+ *  DESCRIPTION: Component which contains the routes to be rendered in the application. Provides a boolean of whether a user has been verified to the HomeContainer
+ *               component to assist with rendering decisions further in the application.
+ *  PROPS: N/A
  *  FLOW: App => Routes
  *  PARENT: App
  *  CHILDREN: HomeContainer

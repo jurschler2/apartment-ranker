@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { checkToken, verifyToken, generateToken } from "../helpers/auth";
-import useAPI from "../helpers/useAPI";
+import React, { useState } from "react";
+import { generateToken } from "../helpers/auth";
 import InitialHomeLoad from "./InitialHomeLoad";
 import Home from "./Home";
 
@@ -11,7 +10,6 @@ import Home from "./Home";
  *  PARENT: Routes
  *  CHILDREN: InitialHomeLoad, Home
  */
-
 
 function HomeContainer({ createdUser }) {
 

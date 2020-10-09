@@ -4,15 +4,13 @@ import { patchRankingsToAPI } from "../reducer/actions";
 import { useDispatch } from "react-redux";
 import { calculateAggregateRankings } from "../helpers/rankingCalculation";
 
-
 /**
- *  DESCRIPTION:
- *  PROPS: 
- *  FLOW: 
- *  PARENT: 
- *  CHILDREN: 
+ *  DESCRIPTION: Accepts the rankings object as props and renders the rankings form, displaying the calculated aggregate ranking.
+ *  PROPS: rankings (Object) 
+ *  FLOW: App => Routes => HomeContainer => Home => ItemList => ItemCard => RankingsForm
+ *  PARENT: ItemCard
+ *  CHILDREN: N/A
  */
-
 
 function RankingsForm({ rankings }) {
 
@@ -37,9 +35,7 @@ function RankingsForm({ rankings }) {
        onSubmit={(values, { setSubmitting }) => {
          setTimeout(() => {
            alert(JSON.stringify(values, null, 2));
-           console.log("This is what is going into the rankings calculation:", {...rankings, ...values})
            let ranking_aggregate = calculateAggregateRankings({...rankings, ...values})
-           console.log("This is the aggregate ranking calculated:", ranking_aggregate)
            dispatch(patchRankingsToAPI({...values, r_apartment_url, ranking_id, ranking_aggregate}))
            setSubmitting(false);
          }, 400);
@@ -47,10 +43,6 @@ function RankingsForm({ rankings }) {
      >
        {({ isSubmitting }) => (
 
-        // <div className="rankingInputContainer">
-        // <label>Aggregate Score</label>
-        // {}
-        // </div>
          <Form>
 
            <div className="rankingInputContainer">

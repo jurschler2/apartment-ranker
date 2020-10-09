@@ -1,5 +1,4 @@
-import React, { useEffect } from "react";
-import { generateToken } from "../helpers/auth";
+import React from "react";
 import HomeDemo from "./HomeDemo";
 
 /**
