@@ -10,31 +10,18 @@ apartment_ranker_api = Blueprint("apartment_ranker_api", __name__)
 @apartment_ranker_api.route('/api/apartments', methods=["POST"])
 @jwt_required
 def create_apartment():
-    """ Return JSON object of specific apartment """
+    """ POST a new apartment and return JSON object of specific apartment """
 
     new_apt_url = request.json['url']
 
-    print(f"This is the g-user: {g.user.user_ip_address}")
-
-    output = Apartment.add_apartment(url=new_apt_url, ip_address=g.user.user_ip_address)
-
-    print(f"This is the pre-serialize output: {output}")
+    output = Apartment.add_apartment(url=new_apt_url,
+                                     ip_address=g.user.user_ip_address)
 
     return output.serialize()
 
 
-@apartment_ranker_api.route('/api/apartment/<int:apartment_id>', methods=["GET"])
-def show_specific_apartment(apartment_id):
-    """ Return JSON object of specific apartment """
-
-    apt = Apartment.query.get_or_404(apartment_id)
-
-    output = apt.serialize()
-
-    return output
-
-
-@apartment_ranker_api.route('/api/apartments/<int:ranking_id>', methods=["PATCH"])
+@apartment_ranker_api.route('/api/apartments/<int:ranking_id>',
+                            methods=["PATCH"])
 @jwt_required
 def update_rankings(ranking_id):
     """ PATCH an existing apartment's rankings """
@@ -58,7 +45,7 @@ def update_rankings(ranking_id):
 @apartment_ranker_api.route('/api/apartments', methods=["GET"])
 @jwt_required
 def get_every_apartment():
-    """ """
+    """ GET every apartment for the current user """
 
     print("Do we even get in here for all apartments?")
 
@@ -69,7 +56,7 @@ def get_every_apartment():
 
 @apartment_ranker_api.route('/api/users/signup', methods=["POST"])
 def generate_user():
-    """ """
+    """ POST a new user """
 
     user = User.create_user(ip_address=request.remote_addr)
 
@@ -82,14 +69,17 @@ def generate_user():
 @apartment_ranker_api.route('/api/users/confirm', methods=["GET"])
 @jwt_required
 def confirm_user():
-    """ """
+    """ GET an existing user via JWT, if existing provide confirmation """
 
     return {"status": "confirmed"}
 
 
 @apartment_ranker_api.route('/api/users/check', methods=["GET"])
 def check_user():
-    """ """
+    """
+    GET an existing user via the request's IP address.
+    If existing, return user, else return message indicating no user exists.
+    """
 
     user = User.query.get(request.remote_addr)
 
