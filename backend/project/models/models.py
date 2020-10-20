@@ -60,7 +60,7 @@ class Apartment(db.Model):
 
     @classmethod
     def get_all_apartments(cls, ip_address):
-        """ Return a serialized object of all apartments """
+        """ Return a serialized dictionary of all apartments """
 
         apartments = Apartment.query.filter_by(a_user_ip_address=ip_address)
 
@@ -124,7 +124,7 @@ class Rankings(db.Model):
         return rankings
 
     def serialize_for_apartment(self):
-        """ serialize an apartment's rankings """
+        """ Return a dictionary of the rankings """
 
         return {
             "ranking_id": self.ranking_id,
@@ -163,7 +163,7 @@ class Photo(db.Model):
         return f"<Photo {self.photo_id} for apt {self.p_apartment_url}>"
 
     def serialize_for_apartment(self):
-        """ serialize a photo """
+        """ Return the photo's URL when called later for an apartment """
 
         return self.photo_url
 
@@ -185,6 +185,7 @@ class User(db.Model):
         return f"<User {self.user_ip_address  }>"
 
     def generate_token(self):
+        """ Using the JWT external library, generate a unique token for a user """
         encoded_jwt = encode(
             {"user_ip_address": self.user_ip_address},
             SECRET_KEY,
@@ -196,6 +197,8 @@ class User(db.Model):
         return token
 
     def serialize(self):
+        """ Return a dictionary of a user. """
+
         token = self.generate_token()
 
         return {
@@ -208,6 +211,12 @@ class User(db.Model):
 
     @classmethod
     def create_user(cls, ip_address):
+        """
+        Class method to add register a user.
+        Accepts a URL and if it does not exist in the database,
+        returns a user object. Otherwise it returns an error
+        message.
+        """
 
         user = User(user_ip_address=ip_address)
 
