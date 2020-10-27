@@ -11,10 +11,10 @@ import AOS from 'aos';
 const STORE = createStore(
   rootReducer,
   compose(
-    applyMiddleware(thunk),
-    window.__REDUX_DEVTOOLS_EXTENSION__
-        ? window.__REDUX_DEVTOOLS_EXTENSION__()
-        : f => f
+    applyMiddleware(thunk)
+    // window.__REDUX_DEVTOOLS_EXTENSION__
+    //     ? window.__REDUX_DEVTOOLS_EXTENSION__()
+    //     : f => f
   ));
 
 function App() {
