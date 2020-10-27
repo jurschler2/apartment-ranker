@@ -1,7 +1,7 @@
 import axios from "axios";
 import {ADD_APARTMENT, LOAD_APARTMENTS, LOAD_USER, UPDATE_RANKINGS} from "./actionTypes";
 
-const BASE_URL = "http://localhost:5000/api/apartments";
+const BASE_URL = "https://apartment-ranker-backend.herokuapp.com";
 
 export function addApartment (newApartment) {
   return {

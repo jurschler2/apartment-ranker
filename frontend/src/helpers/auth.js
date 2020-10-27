@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const AUTH_BASE_URL = "http://localhost:5000/api/users";
+const AUTH_BASE_URL = "https://apartment-ranker-backend.herokuapp.com/api/users";
 
 /**
  * setAuthHeader
