@@ -17,7 +17,6 @@ class ApartmentRankerAPI {
   }
 
   static async addApartment(url) {
-    console.log("This is the url", url)
     const result = await axios.post(BASE_API_URL, {url})
     return result.data;
   }

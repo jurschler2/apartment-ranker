@@ -51,7 +51,7 @@ export function getApartmentsFromAPI() {
 
     try {
       let res = await axios.get(BASE_URL);
-      console.log("This is the response for all apartments:", res)
+      // console.log("This is the response for all apartments:", res)
     
       let apartmentURLstoApartments = {};
       res.data.apartments.forEach(a => apartmentURLstoApartments[a.apartment_url] = a)
@@ -70,7 +70,7 @@ export function patchRankingsToAPI(formData) {
     try {
       const ranking_id = formData.ranking_id
       let res = await axios.patch(`${BASE_URL}/${ranking_id}`, {formData})
-      console.log("this is the response to update the rankings:", res.data)
+      // console.log("this is the response to update the rankings:", res.data)
       dispatch(updateRankings(res.data.apartment_rankings))
       
       

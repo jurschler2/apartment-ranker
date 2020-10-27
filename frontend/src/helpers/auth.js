@@ -8,9 +8,9 @@ const AUTH_BASE_URL = "http://localhost:5000/api/users";
  * - adds JWT from localStorage to axios default Authorization header
  */
 export const setAuthHeader = () => {
-  if (window?.localStorage?.getItem("_token")) {
+  if (window?.localStorage?.getItem("_apartmentRankerToken")) {
     axios.defaults.headers.common["Authorization"] = localStorage.getItem(
-      "_token"
+      "_apartmentRankerToken"
     );
   }
 };
@@ -18,11 +18,11 @@ export const setAuthHeader = () => {
 /**
  * checkToken
  *
- * - checks localStorage for a key of _token
+ * - checks localStorage for a key of _apartmentRankerToken
  * - This does no validation, it merely checks localStorage
  */
 export const checkToken = () => {
-  if (localStorage.getItem("_token")) {
+  if (localStorage.getItem("_apartmentRankerToken")) {
     
     setAuthHeader();
     return true
@@ -40,7 +40,7 @@ export const checkToken = () => {
  * }
  */
 export const verifyToken = async () => {
-  if (!localStorage.getItem("_token")) {
+  if (!localStorage.getItem("_apartmentRankerToken")) {
     return { status: "error", message: "No token found." };
   }
   setAuthHeader();
@@ -59,7 +59,7 @@ export const checkUser = async () => {
   console.log("This is the response to check:", res)
 
   if (res.data.token) {
-    localStorage.setItem("_token", res.data.token);
+    localStorage.setItem("_apartmentRankerToken", res.data.token);
     setAuthHeader();
     return true;
   }
@@ -78,7 +78,7 @@ export const generateToken = async () => {
     const res = await axios.post(`${AUTH_BASE_URL}/signup`);
   
     if (res.status === 200) {
-      localStorage.setItem("_token", res.data.token);
+      localStorage.setItem("_apartmentRankerToken", res.data.token);
       setAuthHeader();
     }
   }

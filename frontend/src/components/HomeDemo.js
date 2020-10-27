@@ -18,7 +18,13 @@ function HomeDemo({ moveToNext }) {
       <div>
         * insert GIF here *
       </div>
-      <button type="button" onClick={moveToNext}>Try it</button>
+      <div className="tryItButton">
+        <button type="button" onClick={moveToNext}>
+          <span>
+          Try it
+          </span>
+        </button>
+        </div>
     </div>
   );
 

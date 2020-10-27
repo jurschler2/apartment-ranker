@@ -73,16 +73,17 @@ function ItemCard({ address, price, pics, url, rankings }) {
        </Col>
        <Col md={12} lg={8}>
          <div className="projectDetails">
-          <p className="project-title"><strong>{address}</strong></p>
-          <p className="project-title"><strong>{price}</strong></p>
-          <p>Check it out on <a href={`${url}`}>Craigslist</a>.</p>
+          <p className="project-title">{price}    |    {address}    |    <a href={`${url}`}><i className="fas fa-external-link-alt"/></a></p>
+          {/* <p className="project-title"> | </p>
+          <p className="project-title">{address}</p>
+          <p><a href={`${url}`}>More Info</a></p> */}
          </div>
          <div className="rankingInputContainer">
            <label>
            Aggregate Ranking:
            </label>
            <p className="aggregate-ranking" style={{color:rankingsColor}}>
-             {aggregateRankings|| "Not Yet Ranked"}
+             {aggregateRankings|| "N/A"}
            </p>
          </div>
         <RankingsForm rankings={rankings} url={url} />

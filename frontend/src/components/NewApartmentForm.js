@@ -18,7 +18,7 @@ function NewApartmentForm() {
   const dispatch = useDispatch()
 
   return (
-    <div>
+    <>
      <Formik
        initialValues={{ url: ''
                       }}
@@ -38,16 +38,21 @@ function NewApartmentForm() {
      >
        {({ isSubmitting }) => (
          <Form>
-           <label>Add an apartment</label>
-           <Field type="text" name="url" placeholder="https://exloc.craigslist.org/exloc/ex/ex/example-listing/99999999.html" />
-           <ErrorMessage name="url" component="div" />
-           <button type="submit" disabled={isSubmitting}>
-             Submit
-           </button>
+           <div className="newApartmentFormField">
+            <Field type="text" name="url" placeholder="https://exloc.craigslist.org/exloc/ex/ex/example-listing/99999999.html" />
+            <ErrorMessage name="url" component="div" />
+           </div>
+           <div className="newApartmentFormButton">
+            <button type="submit" disabled={isSubmitting}>
+              <span>
+              Add
+              </span>
+            </button>
+           </div>
          </Form>
        )}
      </Formik>
-   </div>
+   </>
  );
 }
 

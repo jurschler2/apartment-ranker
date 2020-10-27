@@ -10,6 +10,8 @@ primaryFont {
   text-align: left;
 }
 
+
+
 p {
   @extend primaryFont;
   line-height: 1.7rem;
@@ -20,6 +22,6 @@ label {
   @extend p;
 }
 
-a {
+.project-title a {
   @extend p;
 }

@@ -30,6 +30,9 @@ function HomeContainer({ createdUser }) {
 
   return (
     <>
+    <div className="apartment-ranker-header">
+      <h2><i className="far fa-building"></i> Apartment Ranker</h2>
+    </div>
     {(!haveToken && !createdUser)
       ? <InitialHomeLoad moveToNext={handleMoveToNext} />
       : <Home />}

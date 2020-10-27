@@ -50,11 +50,6 @@ function Home() {
      <Container className="sectionContainer" id="/apartments">
        <Row>
          <Col md={12} lg={12}>
-           <h3>Apartments</h3>
-         </Col>
-       </Row>
-       <Row>
-         <Col md={12} lg={12}>
           <div className="itemCardContainer">
             {!apartments
               ? <p>No apartments have been added yet.</p>
@@ -64,13 +59,13 @@ function Home() {
        </Row>
       </Container>
       <Container className="sectionContainer" id="/add">  
-        <Row>
+        {/* <Row> */}
           <Col md={12} lg={12}>
             <div className="newApartmentForm">
               <NewApartmentForm />
             </div> 
           </Col>
-        </Row>
+        {/* </Row> */}
       </Container>
       </>   
   )

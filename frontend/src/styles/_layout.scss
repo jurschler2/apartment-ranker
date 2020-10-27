@@ -3,8 +3,8 @@
 @import "~bootstrap/scss/variables.scss";
 @import "~bootstrap/scss/mixins/_breakpoints.scss";
 
-$backgroundColor: #ffffe5;
-$cardColor: #fbfaf3;
+$backgroundColor: #e9e9eb;
+$cardColor:  #f6f6f7;
 
 /* FULLPAGE */
 
@@ -16,11 +16,76 @@ $cardColor: #fbfaf3;
 
 .sectionContainer {
   margin: 2rem;
-  padding: 100px 0;
+  padding-left: 100px 0;
+  padding-right: 100px 0;
+  padding-top: 20px;
+  padding-bottom: 20px;
   color: $primaryColor;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+/* HOMECONTAINER */
+
+.apartment-ranker-header {
+  padding-top: 40px;
+  text-align: center;
+}
+
+/* INITIALHOMELOAD */
+
+.welcome-tagline {
+  padding-top: 40px;
+  padding-bottom: 40px;
+  text-align: center;
+}
+
+/* HOMEDEMO */
+
+.tryItButton {
+  text-align: center;
+}
+
+.tryItButton button {
+  display: inline-block;
+  border-radius: 4px;
+  background-color: $cardColor;
+  border: none;
+  border: 1px solid $secondaryColor;
+  color: $secondaryColor;
+  text-align: center;
+  // font-size: 28px;
+  padding: 2px;
+  width: 70px;
+  transition: all 0.4s;
+  cursor: pointer;
+  margin: 5px;
+}
+
+.tryItButton span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.4s;
+}
+
+.tryItButton span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -1px;
+  transition: 0.4s;
+}
+
+.tryItButton:hover span {
+  padding-right: 20px;
+}
+
+.tryItButton:hover span:after {
+  opacity: 1;
+  right: 0;
 }
 
 /* ITEMCARD */
@@ -46,7 +111,7 @@ $cardColor: #fbfaf3;
   background-position: left;
   background-size: cover;
   background-color: $secondaryColor;
-  border: 3px solid $secondaryColor;
+  border: 1px solid $secondaryColor;
   border-radius: .25rem;
 
   &:hover {
@@ -63,7 +128,7 @@ $cardColor: #fbfaf3;
 }
 
 .aggregate-ranking {
-  font-size: 3rem;
+  font-size: 2rem;
 }
 
 /* RANKINGSFORM */
@@ -83,7 +148,77 @@ $cardColor: #fbfaf3;
   width: 3.25rem;
 }
 
-// label, input {
-//   display: block;
-// }
 
+.btn button{
+  border-radius: 4px;
+  background-color: $cardColor;
+  color: $secondaryColor;
+  border: 1px solid $secondaryColor;
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+
+.btn button:hover {
+  background-color: $secondaryColor;
+  color: $cardColor;
+}
+
+/* NEWAPARTMENTFORM */
+
+.newApartmentFormField {
+  display: inline;
+}
+
+
+.newApartmentForm Form {
+  text-align: center;
+}
+
+.newApartmentForm input {
+  width: 48%;
+  text-align:left;
+}
+.newApartmentFormButton {
+  display: inline;
+  margin-left: .5rem;
+}
+
+.newApartmentFormButton button {
+  display: inline-block;
+  border-radius: 4px;
+  background-color: $secondaryColor;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  // font-size: 28px;
+  padding: 2px;
+  width: 60px;
+  transition: all 0.4s;
+  cursor: pointer;
+  margin: 5px;
+}
+
+.newApartmentFormButton span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.4s;
+}
+
+.newApartmentFormButton span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -1px;
+  transition: 0.4s;
+}
+
+.newApartmentFormButton:hover span {
+  padding-right: 20px;
+}
+
+.newApartmentFormButton:hover span:after {
+  opacity: 1;
+  right: 0;
+}

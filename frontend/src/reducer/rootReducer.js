@@ -24,10 +24,6 @@ import produce from "immer";
           draft.apartments[action.rankings.r_apartment_url].apartment_rankings = {... draft.apartments[action.rankings.r_apartment_url].apartment_rankings, ... action.rankings};
           break;
 
-        // case LOAD_USER:
-        //   draft.user = action.user;
-        //   break;  
-
         default:
           return draft;  
       }
