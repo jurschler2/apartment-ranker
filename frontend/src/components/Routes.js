@@ -14,7 +14,7 @@ import useAPI from "../helpers/useAPI";
  */
 
 function Routes() {
-  const [isLoading, error] = useAPI(verifyToken);
+  const [isLoading, error, data] = useAPI(verifyToken);
 
   let user;
 

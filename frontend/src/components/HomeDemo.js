@@ -1,4 +1,5 @@
 import React from "react";
+import apartmentRankerDemo from "../images/apartmentRankerDemo.gif";
 
 /**
  *  DESCRIPTION: Component that renders a GIF showing how to use the site. Contains a button which invokes the creation of a token.
@@ -12,11 +13,8 @@ function HomeDemo({ moveToNext }) {
 
   return (
     <div>
-      <p>
-        How it works:
-      </p>
-      <div>
-        * insert GIF here *
+      <div className="demoGifContainer">
+        <img src={apartmentRankerDemo} alt={apartmentRankerDemo} />
       </div>
       <div className="tryItButton">
         <button type="button" onClick={moveToNext}>

@@ -46,34 +46,38 @@ export const verifyToken = async () => {
   setAuthHeader();
 
   let res = await axios.get(`${AUTH_BASE_URL}/confirm`)
-  if (res.status === "confirmed") {
+  if (res.data.status === "confirmed") {
     return true;
   } else {
+    localStorage.removeItem("_apartmentRankerToken")
     return false
   }
 };
 
-export const checkUser = async () => {
+// export const checkUser = async () => {
 
-  const res = await axios.get(`${AUTH_BASE_URL}/check`);
-  console.log("This is the response to check:", res)
+//   const res = await axios.get(`${AUTH_BASE_URL}/check`);
+//   console.log("This is the response to check:", res)
 
-  if (res.data.token) {
-    localStorage.setItem("_apartmentRankerToken", res.data.token);
-    setAuthHeader();
-    return true;
-  }
-  return false;
-}
+//   if (res.data.token) {
+//     localStorage.setItem("_apartmentRankerToken", res.data.token);
+//     setAuthHeader();
+//     return true;
+//   }
+//   return false;
+// }
 
 
 export const generateToken = async () => {
 
-  const existingUser = await checkUser();
+  // REMINDER: Commenting out checkUser - there is not a way to identify the unique user IP address when using Heroku, so there is not a way to look up a user
+  //           without some kind of account creation. Therefore, if the token is gone we must just generate a brand new one.
 
-  console.log("This is the existing user check:", existingUser)
+  // const existingUser = await checkUser();
 
-  if (!existingUser) {
+  // console.log("This is the existing user check:", existingUser)
+
+  // if (!existingUser) {
     
     const res = await axios.post(`${AUTH_BASE_URL}/signup`);
   
@@ -81,7 +85,7 @@ export const generateToken = async () => {
       localStorage.setItem("_apartmentRankerToken", res.data.token);
       setAuthHeader();
     }
-  }
+  // }
 
 }
 

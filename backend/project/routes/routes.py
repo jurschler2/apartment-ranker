@@ -1,10 +1,13 @@
 """ Routes to show apartments """
 from project import db
+from flask_cors import CORS
 from flask import request, Blueprint, g
 from project.models.models import Apartment, Rankings, User
 from project.helpers.decorators import jwt_required
 
 apartment_ranker_api = Blueprint("apartment_ranker_api", __name__)
+
+CORS(apartment_ranker_api)
 
 
 @apartment_ranker_api.route('/api/apartments', methods=["POST"])
@@ -15,7 +18,7 @@ def create_apartment():
     new_apt_url = request.json['url']
 
     output = Apartment.add_apartment(url=new_apt_url,
-                                     ip_address=g.user.user_ip_address)
+                                     user_random_id=g.user.user_random_id)
 
     return output.serialize()
 
@@ -47,7 +50,7 @@ def update_rankings(ranking_id):
 def get_every_apartment():
     """ GET every apartment for the current user """
 
-    output = Apartment.get_all_apartments(ip_address=g.user.user_ip_address)
+    output = Apartment.get_all_apartments(user_random_id=g.user.user_random_id)
 
     return output
 
@@ -56,7 +59,7 @@ def get_every_apartment():
 def generate_user():
     """ POST a new user """
 
-    user = User.create_user(ip_address=request.remote_addr)
+    user = User.create_user()
 
     if isinstance(user, User):
         return user.serialize()
@@ -69,19 +72,21 @@ def generate_user():
 def confirm_user():
     """ GET an existing user via JWT, if existing provide confirmation """
 
-    return {"status": "confirmed"}
+    if g.user:
+        return {"status": "confirmed"}
+    else:
+        return {"status": "invalid"}
 
+# @apartment_ranker_api.route('/api/users/check', methods=["GET"])
+# def check_user():
+#     """
+#     GET an existing user via the request's IP address.
+#     If existing, return user, else return message indicating no user exists.
+#     """
 
-@apartment_ranker_api.route('/api/users/check', methods=["GET"])
-def check_user():
-    """
-    GET an existing user via the request's IP address.
-    If existing, return user, else return message indicating no user exists.
-    """
+#     user = User.query.get(request.headers['X-Forwarded-For'][0])
 
-    user = User.query.get(request.remote_addr)
+#     if isinstance(user, User):
+#         return user.serialize()
 
-    if isinstance(user, User):
-        return user.serialize()
-
-    return {"status": "no existing user."}
+#     return {"status": "no existing user."}

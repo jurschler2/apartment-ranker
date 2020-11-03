@@ -12,7 +12,7 @@ app = Flask(__name__)
 app.wsgi_app = ProxyFix(app.wsgi_app)
 
 cors = CORS(app)
-# app.config['CORS_HEADERS'] = 'Content-Type'
+app.config['CORS_HEADERS'] = 'Content-Type'
 # toolbar = DebugToolBarExtension(app)
 
 if os.environ.get("FLASK_ENV") == "production":
@@ -36,4 +36,5 @@ db = SQLAlchemy(app)
 
 from project.routes.routes import apartment_ranker_api
 
-app.register_blueprint(apartment_ranker_api, url_prefix="")
+app.register_blueprint(apartment_ranker_api,
+                       url_prefix="")

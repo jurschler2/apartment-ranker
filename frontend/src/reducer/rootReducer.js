@@ -1,4 +1,4 @@
-import { ADD_APARTMENT, LOAD_APARTMENTS, LOAD_USER, UPDATE_RANKINGS } from "./actionTypes";
+import { ADD_APARTMENT, LOAD_APARTMENTS, UPDATE_RANKINGS } from "./actionTypes";
 
 import produce from "immer";
 
